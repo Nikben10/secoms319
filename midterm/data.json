@@ -1,0 +1,8 @@
+{
+	"name": "Laptop1",
+	"price": "34.50",
+	"shortDescription" : "Blah blah blah",
+	"longDescription" : "Blah Blah Blah Blah blah",
+	"imageName" : "laptop1.jpeg",
+	"screenSize" : "19 inch"
+}
