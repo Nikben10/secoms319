@@ -12,8 +12,8 @@ fetch('./data.json')
 function append_data(objects){
     let div = document.getElementById("first");
 
-    // console.log(objects["laptops"]);
-    for(let object of objects["laptops"]) {
+    // console.log(objects["computers"]);
+    for(let object of objects["computers"]) {
         let col = document.createElement("div");
         // console.log(object);
         col.classList.add("col");
