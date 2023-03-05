@@ -1,4 +1,4 @@
-{"computers" : [{
+{"laptops" : [{
 		"name": "HP Spectre x360",
 		"price": "1249.99",
 		"shortDescription" : "2-in-1 laptop with Intel Core i5-1235U (10-core), 512 GB SSD",
@@ -45,8 +45,8 @@
 		"longDescription" : "This laptop has some of it with an i3 Intel Core processor with up to 4.5 GHz and 12 cores, 512GB SSD storage, and Windows 11.",
 		"imageName" : "hp_omen_16.jpeg",
 		"screenSize" : "16"
-	},
-	{
+	}],
+"computers": [{
 		"name": "HP Chromebase All-in-One",
 		"price": "1569.99",
 		"shortDescription" : "All-in-One desktop with Intel Core i5-12500H (12-core), 1TB SSD",

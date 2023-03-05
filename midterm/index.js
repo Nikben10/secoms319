@@ -23,7 +23,7 @@ function append_data(objects){
         image.src = "./images/" + object["imageName"];
         let body = document.createElement("div");
         body.classList.add("card-body");
-        body.innerHTML = `<p> description here </p>`;
+        body.innerHTML = `<h1>${object["name"]}</h1> <br> <p> ${object["shortDescription"]} </p>`;
         card.appendChild(image);
         card.appendChild(body);
         col.appendChild(card);
