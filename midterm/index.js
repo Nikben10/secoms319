@@ -17,16 +17,18 @@ function append_data(objects){
         let col = document.createElement("div");
         // console.log(object);
         col.classList.add("col");
-        let card = document.createElement("div");
-        card.classList.add("card_shadow-sm");
-        let image = document.createElement('img');
-        image.src = "./images/" + object["imageName"];
-        let body = document.createElement("div");
-        body.classList.add("card-body");
-        body.innerHTML = `<h1>${object["name"]}</h1> <br> <p> ${object["shortDescription"]} </p>`;
-        card.appendChild(image);
-        card.appendChild(body);
-        col.appendChild(card);
+        col.innerHTML = `
+            <div class="card shadow-sm">
+                <img src=${"./images/" + object["imageName"]} alt=${object["alt"]}> 
+                <div class="card-body">
+                    <h1 class="product_name">${object["name"]}</h1>
+                    <p class="card-text">${object["shortDescription"]}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <p class="price">$${object["price"]}</p> 
+                    </div>
+                </div>
+            </div>
+        `;
         div.appendChild(col);
     }
 }
