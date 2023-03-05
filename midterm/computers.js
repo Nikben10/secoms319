@@ -20,7 +20,7 @@ function append_data(objects){
         if (object["screenSize"] != "") {
             col.innerHTML = `
                 <div class="card shadow-sm">
-                    <img src=${"./images/" + object["imageName"]} alt=${object["alt"]}> 
+                    <img src=${"./images/" + object["imageName"]} alt=${object["alt"]} > 
                     <div class="card-body">
                         <h1 class="product_name">${object["name"]}</h1>
                         <p class="card-text">${object["shortDescription"]}</p>
@@ -34,7 +34,7 @@ function append_data(objects){
         } else {
             col.innerHTML = `
                 <div class="card shadow-sm">
-                    <img src=${"./images/" + object["imageName"]} alt=${object["alt"]}> 
+                    <img src=${"./images/" + object["imageName"]} alt=${object["alt"]} height = 400px> 
                     <div class="card-body">
                         <h1 class="product_name">${object["name"]}</h1>
                         <p class="card-text">${object["shortDescription"]}</p>
