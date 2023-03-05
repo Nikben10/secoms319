@@ -10,21 +10,23 @@ fetch('./data.json')
     });
 
 function append_data(objects){
-    let div = document.getElementById("container");
+    let div = document.getElementById("first");
 
-    for(let object in objects){
-        let col = document.createElement(div);
-        console.log(object);
+    // console.log(objects["computers"]);
+    for(let object of objects["computers"]) {
+        let col = document.createElement("div");
+        // console.log(object);
         col.classList.add("col");
-        let card = document.createElement(div);
+        let card = document.createElement("div");
         card.classList.add("card_shadow-sm");
-        let image = document.createElement(img);
-        image.src = object["imageName"];
-        let body = document.createElement(div);
+        let image = document.createElement('img');
+        image.src = "./images/" + object["imageName"];
+        let body = document.createElement("div");
         body.classList.add("card-body");
         body.innerHTML = `<p> description here </p>`;
         card.appendChild(image);
         card.appendChild(body);
         col.appendChild(card);
+        div.appendChild(col);
     }
 }
