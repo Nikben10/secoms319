@@ -1,10 +1,11 @@
 let objects = JSON.parse("./data.json");
 
 function append_data(objects){
-    let div = document.getElementById("first");
+    let div = document.getElementById("container");
 
     for(let object in objects){
         let col = document.createElement(div);
+        console.log(object);
         col.classList.add("col");
         let card = document.createElement(div);
         card.classList.add("card shadow-sm");
