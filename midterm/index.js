@@ -1,4 +1,13 @@
-let objects = JSON.parse("./data.json");
+fetch('./data.json')
+    .then(function (response){
+        return response.json();
+    })
+    .then(function (data){
+        append_data(data);
+    })
+    .catch(function (err){
+        console.log('error: ' + err);
+    })
 
 function append_data(objects){
     let div = document.getElementById("container");
@@ -19,3 +28,5 @@ function append_data(objects){
         col.appendChild(card);
     }
 }
+
+append_data(objects);
