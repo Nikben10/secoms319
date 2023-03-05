@@ -1,4 +1,4 @@
-{
+{ "lapetop" : [{
 	"name": "HP Spectre x360",
 	"price": "1249.99",
 	"shortDescription" : "2-in-1 laptop with Intel Core i5-1235U (10-core), 512 GB SSD",
@@ -93,4 +93,5 @@
 	"longDescription" : "This All-in-One desktop has it all with an i3 Intel Core processor with up to 4.2 GHz and 4 cores, 256GB SSD storage, and Windows 11.",
 	"imageName" : "hp_24_AiO.jpeg",
 	"screenSize" : "24"
+}]
 }

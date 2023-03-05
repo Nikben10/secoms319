@@ -7,7 +7,7 @@ fetch('./data.json')
     })
     .catch(function (err){
         console.log('error: ' + err);
-    })
+    });
 
 function append_data(objects){
     let div = document.getElementById("container");
@@ -17,7 +17,7 @@ function append_data(objects){
         console.log(object);
         col.classList.add("col");
         let card = document.createElement(div);
-        card.classList.add("card shadow-sm");
+        card.classList.add("card_shadow-sm");
         let image = document.createElement(img);
         image.src = object["imageName"];
         let body = document.createElement(div);
@@ -28,5 +28,3 @@ function append_data(objects){
         col.appendChild(card);
     }
 }
-
-append_data(objects);
