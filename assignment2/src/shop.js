@@ -10,9 +10,9 @@ const Shop = () => {
     const listItems = items.map((el) => (
         <div key={el.id}>
             <img class=
-            "img-fluid" src={el.image} />
-            {el.title}
-            {el.category}
+            "img-fluid" src={el.imageName} />
+            {el.name}
+            {el.shortDescription}
             {el.price}
             <button type="button" onClick={() => removeFromCart(el)}>-</button>{" "}
             <button type="button" variant="light" onClick={() => addToCart(el)}> + </button>
@@ -44,8 +44,8 @@ const Shop = () => {
     const cartItems = cart.map((el) => (
         <div key={el.id}>
             <img class=
-            "img-fluid" src={el.image} width={30} />
-            {el.title}
+            "img-fluid" src={el.imageName} width={30} />
+            {el.name}
             ${el.price}
         </div>
         ));

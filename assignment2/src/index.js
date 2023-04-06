@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import "bootstrap/dist/css/bootstrap.css";
-import Shop from './shop';
+//import "bootstrap/dist/css/bootstrap.css";
+import Shop from "./shop";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -9,5 +9,4 @@ root.render(
     <Shop />
   </React.StrictMode>
 );
-
 
