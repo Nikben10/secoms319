@@ -44,7 +44,7 @@ const Shop = () => {
     const cartItems = cart.map((el) => (
         <div key={el.id}>
             <img class=
-            "img-fluid" src={el.imageName} width={30} />
+            "img-fluid" src={"/images/"+ el.imageName} width={30} />
             {el.name}
             ${el.price}
         </div>
