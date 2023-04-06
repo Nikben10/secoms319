@@ -15,7 +15,6 @@ const Shop = () => {
             {el.price}
             <button type="button" onClick={() => removeFromCart(el)}>-</button>{" "}
             <button type="button" variant="light" onClick={() => addToCart(el)}> + </button>
-            {el.imageName}
         </div>
         ));
     
