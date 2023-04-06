@@ -1,4 +1,5 @@
 [{
+		"id": 1,
 		"name": "HP Spectre x360",
 		"price": "1249.99",
 		"shortDescription" : "2-in-1 laptop with Intel Core i5-1235U (10-core), 512 GB SSD",
@@ -8,6 +9,7 @@
 		"alt" : "HP Spectre x360"
 	},
 	{
+		"id": 2,
 		"name": "HP Envy x360",
 		"price": "899.99",
 		"shortDescription" : "Laptop with Intel Core i5-1235U (10-core), 512 GB SSD",
@@ -17,6 +19,7 @@
 		"alt" : "HP Envy x360"
 	},
 	{
+		"id": 3,
 		"name": "HP Envy",
 		"price": "1409.99",
 		"shortDescription" : "Laptop with Intel Core i5-12500H (12-core), 512 GB SSD, and 16GB of DDR5 RAM",
@@ -26,6 +29,7 @@
 		"alt" : "HP Envy"
 	},
 	{
+		"id": 4,
 		"name": "HP Pavilion",
 		"price": "449.99",
 		"shortDescription" : "Laptop with Intel Core i3-1215U (6-core), 256 GB SSD",
@@ -35,6 +39,7 @@
 		"alt" : "HP Pavilion"
 	},
 	{
+		"id": 5,
 		"name": "HP 14\" laptop",
 		"price": "549.99",
 		"shortDescription" : "Laptop with Intel Core i5-1235U (10-core), 256 GB SSD",
@@ -44,6 +49,7 @@
 		"alt" : "HP 14\" laptop"
 	},
 	{
+		"id": 6,
 		"name": "HP Omen",
 		"price": "34.50",
 		"shortDescription" : "Laptop with Intel Core i3-12500H (12-core), 512 GB SSD",
@@ -53,6 +59,7 @@
 		"alt" : "HP Omen"
 	},
 	{
+		"id": 7,
 		"name": "HP Chromebase All-in-One",
 		"price": "1569.99",
 		"shortDescription" : "All-in-One desktop with Intel Core i5-12500H (12-core), 1TB SSD",
@@ -62,6 +69,7 @@
 		"alt" : "HP Chromebase All-in-One"
 	},
 	{
+		"id": 8,
 		"name": "HP Envy Desktop",
 		"price": "699.99",
 		"shortDescription" : "Desektop with Intel Core i5, 1 TB HDD, NVIDIA 15",
@@ -71,6 +79,7 @@
 		"alt" : "HP Envy Desktop"
 	},
 	{
+		"id": 9,
 		"name": "HP Pavilion Desktop",
 		"price": "829.99",
 		"shortDescription" : "Desktop with Intel Core i7, 2TB HDD, 512GB SSD",
@@ -80,6 +89,7 @@
 		"alt" : "HP Pavilion Desktop"
 	},
 	{
+		"id": 10,
 		"name": "HP Omen 25L 2020",
 		"price": "1379.99",
 		"shortDescription" : "Desktop with Intel Core i5-12400 (6-core), 256 GB SSD",
@@ -89,6 +99,7 @@
 		"alt" : "HP Omen 25L 2020"
 	},
 	{
+		"id": 11,
 		"name": "HP Victus 15",
 		"price": "829.99",
 		"shortDescription" : "Desktop with Intel Core i5-12400 (12-core), 256 GB SSD",
@@ -98,6 +109,7 @@
 		"alt" : "HP Victus 15"
 	},
 	{
+		"id": 12,
 		"name": "HP 24 All-in-One",
 		"price": "799.99",
 		"shortDescription" : "All-in-One with Intel Core i3-13100T (4-core), 256 GB SSD",
