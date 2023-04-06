@@ -9,12 +9,13 @@ const Shop = () => {
     //need to check tags again
     const listItems = items.map((el) => (
         <div key={el.id}>
-            <img class="img-fluid" src={el.imageName} />
+            <img class="img-fluid" src={"../images/"+el.imageName} />
             {el.name}
             {el.shortDescription}
             {el.price}
             <button type="button" onClick={() => removeFromCart(el)}>-</button>{" "}
             <button type="button" variant="light" onClick={() => addToCart(el)}> + </button>
+            {el.imageName}
         </div>
         ));
     
@@ -23,11 +24,11 @@ const Shop = () => {
         }, [cart]);
     
     const total = () => {
-        let totalVal = 0;
+        let totalVal = 0.00;
         for (let i = 0; i < cart.length; i++) {
-        totalVal += cart[i].price;
+        totalVal += Number(cart[i].price);
         }
-        setCartTotal(totalVal);
+        setCartTotal(totalVal.toFixed(2));
         };
 
     const addToCart = (el) => {
@@ -43,7 +44,7 @@ const Shop = () => {
     const cartItems = cart.map((el) => (
         <div key={el.id}>
             <img class=
-            "img-fluid" src={"/images/"+ el.imageName} width={30} />
+            "img-fluid" src={el.imageName} width={30} />
             {el.name}
             ${el.price}
         </div>
