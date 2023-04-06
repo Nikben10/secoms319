@@ -9,7 +9,7 @@ const Shop = () => {
     //need to check tags again
     const listItems = items.map((el) => (
         <div key={el.id}>
-            <img class="img-fluid" src={el.imageName} />
+            <img className="img-fluid" src={"hp_14_laptop.jpeg"} />
             {el.name}
             {el.shortDescription}
             {el.price}
@@ -43,7 +43,7 @@ const Shop = () => {
     const cartItems = cart.map((el) => (
         <div key={el.id}>
             <img class=
-            "img-fluid" src={"/images/"+ el.imageName} width={30} />
+            "img-fluid" src={"./images/"+ el.imageName} width={30} />
             {el.name}
             ${el.price}
         </div>
