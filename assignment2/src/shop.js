@@ -9,8 +9,7 @@ const Shop = () => {
     //need to check tags again
     const listItems = items.map((el) => (
         <div key={el.id}>
-            <img class=
-            "img-fluid" src={el.imageName} />
+            <img class="img-fluid" src={el.imageName} />
             {el.name}
             {el.shortDescription}
             {el.price}
