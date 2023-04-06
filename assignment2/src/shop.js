@@ -15,6 +15,7 @@ const Shop = () => {
             {el.price}
             <button type="button" onClick={() => removeFromCart(el)}>-</button>{" "}
             <button type="button" variant="light" onClick={() => addToCart(el)}> + </button>
+            {el.imageName}
         </div>
         ));
     
@@ -23,11 +24,11 @@ const Shop = () => {
         }, [cart]);
     
     const total = () => {
-        let totalVal = 0;
+        let totalVal = 0.00;
         for (let i = 0; i < cart.length; i++) {
-        totalVal += cart[i].price;
+        totalVal += Number(cart[i].price);
         }
-        setCartTotal(totalVal);
+        setCartTotal(totalVal.toFixed(2));
         };
 
     const addToCart = (el) => {
