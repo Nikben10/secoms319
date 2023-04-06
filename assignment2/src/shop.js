@@ -6,7 +6,7 @@ import items from "./data.json";
 const Shop = () => {
     const [cart, setCart] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
-    //need to check tags
+    //need to check tags again
     const listItems = items.map((el) => (
         <div key={el.id}>
             <img class=
