@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import items from "./data.json";
 
-
-
 const Shop = () => {
     const [cart, setCart] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
-    const [searchString, setSearchString] = useState("");
+    const [page, setPage] = useState(0);            // 0 : Browse, 1 : Cart, 2 : Confirmation
     //need to check tags again
+
+    const [searchString, setSearchString] = useState("");
     let itemsCopy = items;
     if (searchString.length > 0) {
         itemsCopy = items.filter((item) => {
@@ -72,50 +72,61 @@ const Shop = () => {
         setCart(hardCopy);
     };
 
-    const cartItems = cart.map((el) => (
-        <div key={el.id}>
-            <img class="img-fluid" src={require("./images/" + el.imageName)} width={30} />
-            {el.name}
-            ${el.price}
-        </div>
-    ));
+    // const cartItems = cart.map((el) => (
+    //     <div key={el.id}>
+    //         <img class="img-fluid" src={require("./images/" + el.imageName)} width={30} />
+    //         {el.name}
+    //         ${el.price}
+    //     </div>
+    // ));
 
-
-
-
-
-    return (
-    <div>
-        Computer Store Inventory
-        <div className="card">
-            <div className="row">
-            {/* HERE, IT IS THE SHOPING CART */}
-                <div className="col-md-8 cart">
-                    <div className="title">
-                        <div className="row">
-                            <div className="col">
-                                <input onChange={(e) => {
-                                    setSearchString(e.target.value);
-                                    }} placeholder="Search">
-                                </input>
-                            </div>
-                            <div className="col align-self-center text-right text-muted">
-                                Products selected {cart.length}
+    if (page == 0) {
+        return (
+        <div>
+            Computer Store Inventory
+            <div className="card">
+                <div className="row">
+                {/* HERE, IT IS THE SHOPING CART */}
+                    <div className="col-md-8 cart">
+                        <div className="title">
+                            <div className="row">
+                                <div className="col">
+                                    <input onChange={(e) => {
+                                        setSearchString(e.target.value);
+                                        }} placeholder="Search">
+                                    </input>
+                                </div>
+                                <div className="col align-self-center text-right text-muted">
+                                    Products selected {cart.length}
+                                </div>
                             </div>
                         </div>
+                        <div>{listItems}</div>
                     </div>
-                    <div>{listItems}</div>
-                </div>
-                <div className ="float-end">
-                    <p className ="mb-0 me-5 d-flex align-items-center">
-                        <span className ="small text-muted me-2">Order total:</span>
-                        <span className ="lead fw-normal">${cartTotal}</span>
-                    </p>
+                    <div className ="float-end">
+                        <p className ="mb-0 me-5 d-flex align-items-center">
+                            <span className ="small text-muted me-2">Order total:</span>
+                            <span className ="lead fw-normal">${cartTotal}</span>
+                            <button type="button" variant="light" onClick={() => setPage(1)}> View Cart </button>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    );
+        );
+    } else if (page == 1) {
+        return (
+            <p>
+                Cart Page
+            </p>
+        );
+    } else {
+        return (
+            <p>
+                Confirmation Page
+            </p>
+        );
+    }
 }
 
 export default Shop;
