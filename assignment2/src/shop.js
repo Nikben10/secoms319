@@ -6,16 +6,17 @@ import items from "./data.json";
 const Shop = () => {
     const [cart, setCart] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
+    const [searchString, setSearchString] = useState("");
     //need to check tags again
-    const listItems = items.map((el) => (
-        // <div key={el.id}>
-        //     <img className="img-fluid" src={require("./images/" + el.imageName)} />
-        //     {el.name}
-        //     {el.shortDescription}
-        //     {el.price}
-        //     <button type="button" onClick={() => removeFromCart(el)}>-</button>{" "}
-        //     <button type="button" variant="light" onClick={() => addToCart(el)}> + </button>
-        // </div>
+    let itemsCopy = items;
+    if (searchString.length > 0) {
+        itemsCopy = items.filter((item) => {
+            return item.name.toUpperCase().includes(searchString.toUpperCase()) ||
+                    item.shortDescription.toUpperCase().includes(searchString.toUpperCase());
+        });
+    }
+
+    const listItems = itemsCopy.map((el) => (
         <div className="row border-top border-bottom" key={el.id}>
             <div className="row main align-items-center">
                 <div className="col-2">
@@ -39,7 +40,7 @@ const Shop = () => {
     function howManyofThis(id) {
         let hmot = cart.filter((cartItem) => cartItem.id === id);
         return hmot.length;
-        }
+    }
     
     useEffect(() => {
         total();
@@ -48,14 +49,14 @@ const Shop = () => {
     const total = () => {
         let totalVal = 0.00;
         for (let i = 0; i < cart.length; i++) {
-        totalVal += Number(cart[i].price);
+            totalVal += Number(cart[i].price);
         }
         setCartTotal(totalVal.toFixed(2));
-        };
+    };
 
     const addToCart = (el) => {
         setCart([...cart, el]);
-        };
+    };
 
     const removeFromCart = (el) => {
         let hardCopy = [...cart];
@@ -69,7 +70,7 @@ const Shop = () => {
             }
         });
         setCart(hardCopy);
-        };
+    };
 
     const cartItems = cart.map((el) => (
         <div key={el.id}>
@@ -77,21 +78,15 @@ const Shop = () => {
             {el.name}
             ${el.price}
         </div>
-        ));
+    ));
 
 
 
 
 
     return (
-    // <div>
-    //     <div> {listItems} </div>
-    //     <div>items in cart: </div>
-    //     <div>{cartItems}</div>
-    //     <div>Order total to pay :{cartTotal}</div>
-    // </div>
     <div>
-        Computer Store
+        Computer Store Inventory
         <div className="card">
             <div className="row">
             {/* HERE, IT IS THE SHOPING CART */}
@@ -99,9 +94,10 @@ const Shop = () => {
                     <div className="title">
                         <div className="row">
                             <div className="col">
-                                <h4>
-                                    <b>Your Shopping Cart</b>
-                                </h4>
+                                <input onChange={(e) => {
+                                    setSearchString(e.target.value);
+                                    }} placeholder="Search">
+                                </input>
                             </div>
                             <div className="col align-self-center text-right text-muted">
                                 Products selected {cart.length}
