@@ -59,7 +59,15 @@ const Shop = () => {
 
     const removeFromCart = (el) => {
         let hardCopy = [...cart];
-        hardCopy = hardCopy.filter((cartItem) => cartItem.id !== el.id);
+        let foundFirst = false;
+        hardCopy = hardCopy.filter((cartItem) => {
+            if (cartItem.id !== el.id || foundFirst) {
+                return true;
+            } else {
+                foundFirst = true;
+                return false;
+            }
+        });
         setCart(hardCopy);
         };
 
