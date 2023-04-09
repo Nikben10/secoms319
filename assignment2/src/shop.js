@@ -140,10 +140,22 @@ const Shop = () => {
 
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
     const form = document.getElementById('checkout-form')
-    const inputCard = document.querySelector('#inputCard')
-    const alertTrigger = document.getElementById('submit-btn')
     const summaryCard = document.querySelector('.card')
     const summaryList = document.querySelector('.card > ul')
+
+    /*form.addEventListener('submit', event => {
+        //if (!form.checkValidity()) {
+        if (!validate()) {
+        alertPlaceholder.innerHTML = ''
+        alert('<i class="bi-exclamation-circle"></i> Something went wrong!','danger')
+        }
+        event.preventDefault()
+        event.stopPropagation()
+        form.classList.add('was-validated')
+        }, false );*/
+
+    
+        
 
     let validate = function(){
         let val = true;
@@ -173,30 +185,31 @@ const Shop = () => {
         userInfo.card = card.value;
         }
         if (val){
-        form.classList.add("collapse");
-        for (const [key, value] of Object.entries(userInfo)) {
-        summaryList.innerHTML += '<li class="list-group-item"> <b>' + `${key}` +
-        ': </b>' + `${value}` +'</li>'
+        //form.classList.add("collapse");
+        //for (const [key, value] of Object.entries(userInfo)) {
+        //}
+        //summaryCard.classList.remove("collapse")
         }
-        summaryCard.classList.remove("collapse")
-        alertPlaceholder.innerHTML = ""
-        alert('<i class="bi-cart-check-fill"></i> You have made an order!',
-        'success')
+        if(val){
+            setPage(2);
         }
-        return val;
+        else{
+            setPage(1);
         }
+    }
 
-        const alert = (message, type) => {
-            const wrapper = document.createElement('div')
-            wrapper.innerHTML = [
-                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-                ` <div>${message}</div>`,
-                ' <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-                '</div>'
-                ].join('')
+    const alert = (message, type) => {
+        const wrapper = document.createElement('div')
+        wrapper.innerHTML = [
+            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+            ` <div>${message}</div>`,
+            ' <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+            '</div>'
+            ].join('')
+        
+            alertPlaceholder.append(wrapper);
+    }
             
-                alertPlaceholder.append(wrapper);
-        }
 
 
 
@@ -258,9 +271,6 @@ const Shop = () => {
                     <div class="col-md-6">
                         <label for="inputEmail4" class="form-label">Email</label>
                         <input type="email" class="form-control" id="inputEmail4"></input>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
                         <div class="invalid-feedback">
                             Must be like, "abc@xyz.efg"
                         </div>
@@ -271,9 +281,6 @@ const Shop = () => {
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="bi-credit-card-fill"></i></span>
                             <input type="text" id="inputCard" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" aria-label="Username" aria-describedby="basic-addon1"></input>
-                            <div class="valid-feedback">
-                            Looks good!
-                            </div>
                             <div class="invalid-feedback">
                             Must be like, "7777-7777-7777-7777"
                             </div>
@@ -294,9 +301,7 @@ const Shop = () => {
                     </div>
                     <div class="col-md-4">
                         <label for="inputState" class="form-label">State</label>
-                        <select id="inputState" class="form-select">
-                            <option selected="">Choose...</option>
-                        </select>
+                        <input type="text" class="form-control" id="inputCity"></input>
                     </div>
                     <div class="col-md-2">
                         <label for="inputZip" class="form-label">Zip</label>
@@ -304,7 +309,7 @@ const Shop = () => {
                     </div>
                 </form>
                 <hr></hr>
-                <button type="button" variant="light" onClick={() => setPage(2)}> Buy </button>
+                <button type="button" variant="light" onClick={() => validate()}> Buy </button>
                 <button type="button" variant="light" onClick={() => setPage(0)}> Continue Shopping</button>
             </div>
         );
