@@ -104,6 +104,9 @@ const Shop = () => {
                     <div className="row text-muted">{el.name}</div>
                 </div>
                 <div className="col">
+                    <button type="button" variant="light" onClick={() => removeFromCart(el)} > - </button>{" "}
+                </div>
+                <div className="col">
                     ${el.price} <span className="close">&#10005;</span> {el.quantity} = {(el.price * el.quantity).toFixed(2)}
                 </div>
             </div>
