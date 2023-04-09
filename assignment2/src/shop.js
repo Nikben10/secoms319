@@ -20,9 +20,6 @@ const Shop = () => {
     const [cartTotal, setCartTotal] = useState(0);
     const [page, setPage] = useState(0);            // 0 : Browse, 1 : Cart, 2 : Confirmation
 
-
-    //need to check tags again
-
     const [searchString, setSearchString] = useState("");
     let itemsCopy = items;
     if (searchString.length > 0) {
@@ -31,7 +28,6 @@ const Shop = () => {
                     item.shortDescription.toUpperCase().includes(searchString.toUpperCase());
         });
     }
-    // console.log(itemsCopy);
     const listItems = itemsCopy.map((el) => (
         <div className="row border-top border-bottom" key={el.id}>
             <div className="row main align-items-center">
@@ -54,7 +50,6 @@ const Shop = () => {
         ));
 
     function howManyofThis(el) {
-        // let hmot = cart.filter((cartItem) => cartItem.id === id);
         if (cart.includes(el)) {
             return el.quantity;
         } else {
@@ -145,16 +140,6 @@ const Shop = () => {
     const summaryCard = document.querySelector('.card')
     const summaryList = document.querySelector('.card > ul')
 
-    /*form.addEventListener('submit', event => {
-        //if (!form.checkValidity()) {
-        if (!validate()) {
-        alertPlaceholder.innerHTML = ''
-        alert('<i class="bi-exclamation-circle"></i> Something went wrong!','danger')
-        }
-        event.preventDefault()
-        event.stopPropagation()
-        form.classList.add('was-validated')
-        }, false );*/
 
     
         
@@ -187,13 +172,6 @@ const Shop = () => {
         userInfo.card = card.value;
         }
         if (val){
-        //form.classList.add("collapse");
-        //for (const [key, value] of Object.entries(userInfo)) {
-        //}
-        //summaryCard.classList.remove("collapse")
-           /* Object.assign(userInfo.card, card.value);
-            Object.assign(userInfo.fullName, name.value);
-            Object.assign(userInfo.email, email.value);*/
             userInfo.updateUser(name.value, card.value, email.value);
         }
         if(val){
@@ -253,7 +231,7 @@ const Shop = () => {
             </div>
         </div>
         );
-    } else if (page == 1) { //work here
+    } else if (page == 1) {
         return (
             <div>
                 <p>
