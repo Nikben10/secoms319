@@ -144,13 +144,15 @@ const Shop = () => {
             </div>
         </div>
         );
-    } else if (page == 1) {
+    } else if (page == 1) { //work here
         return (
             <div>
                 <p>
                     Cart Page
                 </p>
+                <div>{cartItems}</div>
                 <button type="button" variant="light" onClick={() => setPage(2)}> Buy </button>
+                <button type="button" variant="light" onClick={() => setPage(0)}> Continue Shopping</button>
             </div>
         );
     } else {
