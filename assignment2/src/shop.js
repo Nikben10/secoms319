@@ -7,12 +7,12 @@ const Shop = () => {
     const [page, setPage] = useState(0);            // 0 : Browse, 1 : Cart, 2 : Confirmation
 
     var userInfo = {
-        fullName : "Bill Fargot",
-        cardNumber : "1234567890123456",
-        city : "West Taiwan",
-        zip : "50001",
-        state : "iowa",
-        email : "xxx@yahoo.com"
+        fullName : '',
+        cardNumber : '',
+        city : '',
+        zip : '',
+        state : '',
+        email : ''
     }
     //need to check tags again
 
@@ -138,6 +138,68 @@ const Shop = () => {
         setPage(2);
     }
 
+    const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+    const form = document.getElementById('checkout-form')
+    const inputCard = document.querySelector('#inputCard')
+    const alertTrigger = document.getElementById('submit-btn')
+    const summaryCard = document.querySelector('.card')
+    const summaryList = document.querySelector('.card > ul')
+
+    let validate = function(){
+        let val = true;
+        let email = document.getElementById('inputEmail4')
+        let name = document.getElementById('inputName')
+        let card = document.getElementById('inputCard')
+        
+
+        email.setAttribute("class", "form-control is-valid");
+        userInfo.email = email.value;
+        if (name.value.length == 0)
+        {
+        name.setAttribute("class","form-control is-invalid")
+        val = false;
+        }
+        else{
+        name.setAttribute("class", "form-control is-valid");
+        userInfo.name = name.value;
+        }
+        if (!isNaN(card.value))
+        {
+        card.setAttribute("class","form-control is-invalid");
+        val = false;
+        }
+        else{
+        card.setAttribute("class", "form-control is-valid");
+        userInfo.card = card.value;
+        }
+        if (val){
+        form.classList.add("collapse");
+        for (const [key, value] of Object.entries(userInfo)) {
+        summaryList.innerHTML += '<li class="list-group-item"> <b>' + `${key}` +
+        ': </b>' + `${value}` +'</li>'
+        }
+        summaryCard.classList.remove("collapse")
+        alertPlaceholder.innerHTML = ""
+        alert('<i class="bi-cart-check-fill"></i> You have made an order!',
+        'success')
+        }
+        return val;
+        }
+
+        const alert = (message, type) => {
+            const wrapper = document.createElement('div')
+            wrapper.innerHTML = [
+                `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+                ` <div>${message}</div>`,
+                ' <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+                '</div>'
+                ].join('')
+            
+                alertPlaceholder.append(wrapper);
+        }
+
+
+
     if (page == 0) {
         return (
         <div>
@@ -180,65 +242,66 @@ const Shop = () => {
                 </p>
                 <div>{cartItems}</div>
                 <hr></hr>
+                <div id="liveAlertPlaceholder"></div>
                 <form class="row g-3" id="checkout-form">
-                <div class="col-md-6">
-                    <label for="inputName" class="form-label">Full Name</label>
-                    <input type="text" class="form-control" id="inputName"></input>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <div class="invalid-feedback">
-                        Must be like, "John Doe"
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <label for="inputEmail4" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4"></input>
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                    <div class="invalid-feedback">
-                        Must be like, "abc@xyz.efg"
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    <label for="inputCard" class="form-label">Card</label>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="bi-credit-card-fill"></i></span>
-                        <input type="text" id="inputCard" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" aria-label="Username" aria-describedby="basic-addon1"></input>
+                    <div class="col-md-6">
+                        <label for="inputName" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="inputName"></input>
                         <div class="valid-feedback">
-                        Looks good!
+                            Looks good!
                         </div>
                         <div class="invalid-feedback">
-                        Must be like, "7777-7777-7777-7777"
+                            Must be like, "John Doe"
                         </div>
                     </div>
-                </div>
 
-                <div class="col-12">
-                    <label for="inputAddress" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"></input>
-                </div>
-                <div class="col-12">
-                    <label for="inputAddress2" class="form-label">Address 2</label>
-                    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"></input>
-                </div>
-                <div class="col-md-6">
-                    <label for="inputCity" class="form-label">City</label>
-                    <input type="text" class="form-control" id="inputCity"></input>
-                </div>
-                <div class="col-md-4">
-                    <label for="inputState" class="form-label">State</label>
-                    <select id="inputState" class="form-select">
-                        <option selected="">Choose...</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <label for="inputZip" class="form-label">Zip</label>
-                    <input type="text" class="form-control" id="inputZip"></input>
-                </div>
+                    <div class="col-md-6">
+                        <label for="inputEmail4" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="inputEmail4"></input>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            Must be like, "abc@xyz.efg"
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="inputCard" class="form-label">Card</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi-credit-card-fill"></i></span>
+                            <input type="text" id="inputCard" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" aria-label="Username" aria-describedby="basic-addon1"></input>
+                            <div class="valid-feedback">
+                            Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                            Must be like, "7777-7777-7777-7777"
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <label for="inputAddress" class="form-label">Address</label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"></input>
+                    </div>
+                    <div class="col-12">
+                        <label for="inputAddress2" class="form-label">Address 2</label>
+                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"></input>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="inputCity" class="form-label">City</label>
+                        <input type="text" class="form-control" id="inputCity"></input>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="inputState" class="form-label">State</label>
+                        <select id="inputState" class="form-select">
+                            <option selected="">Choose...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="inputZip" class="form-label">Zip</label>
+                        <input type="text" class="form-control" id="inputZip"></input>
+                    </div>
                 </form>
                 <hr></hr>
                 <button type="button" variant="light" onClick={() => setPage(2)}> Buy </button>
