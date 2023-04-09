@@ -113,6 +113,22 @@ const Shop = () => {
         </div>
     ));
 
+    const checkoutedItems = cart.map((el) => (
+        <div className="row border-top border-bottom" key={el.id}>
+            <div className="row main align-items-center">
+                <div className="col-2">
+                    <img className="img-fluid" src={require("./images/" + el.imageName)} />
+                </div>
+                <div className="col">
+                    <div className="row text-muted">{el.name}</div>
+                </div>
+                <div className="col">
+                    ${el.price} <span className="close">&#10005;</span> {el.quantity} = {(el.price * el.quantity).toFixed(2)}
+                </div>
+            </div>
+        </div>
+    ));
+
     if (page == 0) {
         return (
         <div>
@@ -154,6 +170,38 @@ const Shop = () => {
                     Cart Page
                 </p>
                 <div>{cartItems}</div>
+                <hr></hr>
+                <div>
+                    <h1>Payment information</h1>
+
+                    <label for="fullName">Full Name: </label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Name"></input>
+                    <label for="email">Email: </label>
+                    <input type="text" id="email" name="email" placeholder="text@yahoo.com"></input>
+
+                    <hr></hr>
+
+                    <label for="card">Card Number: </label>
+                    <input type="text" id="card" name = "card"></input>
+
+                    <hr></hr>
+
+                    <label for="address">address:</label>
+                    <input type="text" id="address" name="address"></input>
+
+                    <hr></hr>
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="city"></input>
+
+                    <label for="state">state: </label>
+                    <input type="text" id="state" name="state"></input>
+
+                    <hr></hr>
+
+                    <label for="zip">Zip:</label>
+                    <input type="text" id="zip" name="zip"></input>
+                </div>
+                <hr></hr>
                 <button type="button" variant="light" onClick={() => setPage(2)}> Buy </button>
                 <button type="button" variant="light" onClick={() => setPage(0)}> Continue Shopping</button>
             </div>
@@ -176,7 +224,7 @@ const Shop = () => {
                                 </div>
                             {/* </div> */}
                         </div>
-                        <div>{cartItems}</div>
+                        <div>{checkoutedItems}</div>
                     </div>
                     <div className ="float-end">
                         <p className ="mb-0 me-5 d-flex align-items-center">
