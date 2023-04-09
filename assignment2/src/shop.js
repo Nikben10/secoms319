@@ -6,10 +6,13 @@ const Shop = () => {
     const [cartTotal, setCartTotal] = useState(0);
     const [page, setPage] = useState(0);            // 0 : Browse, 1 : Cart, 2 : Confirmation
 
-    let userInfo = {
-        "fullName" : "Bill Fargot",
-        "cardNumber" : "1234567890123456",
-        "city" : "West Taiwan"
+    var userInfo = {
+        fullName : "Bill Fargot",
+        cardNumber : "1234567890123456",
+        city : "West Taiwan",
+        zip : "50001",
+        state : "iowa",
+        email : "xxx@yahoo.com"
     }
     //need to check tags again
 
@@ -129,6 +132,12 @@ const Shop = () => {
         </div>
     ));
 
+    function updateUser() {
+        let name = document.getElementById("fullName");
+        userInfo.fullName = name.value;
+        setPage(2);
+    }
+
     if (page == 0) {
         return (
         <div>
@@ -171,36 +180,66 @@ const Shop = () => {
                 </p>
                 <div>{cartItems}</div>
                 <hr></hr>
-                <div>
-                    <h1>Payment information</h1>
-
-                    <label for="fullName">Full Name: </label>
-                    <input type="text" id="fullName" name="fullName" placeholder="Name"></input>
-                    <label for="email">Email: </label>
-                    <input type="text" id="email" name="email" placeholder="text@yahoo.com"></input>
-
-                    <hr></hr>
-
-                    <label for="card">Card Number: </label>
-                    <input type="text" id="card" name = "card"></input>
-
-                    <hr></hr>
-
-                    <label for="address">address:</label>
-                    <input type="text" id="address" name="address"></input>
-
-                    <hr></hr>
-                    <label for="city">City:</label>
-                    <input type="text" id="city" name="city"></input>
-
-                    <label for="state">state: </label>
-                    <input type="text" id="state" name="state"></input>
-
-                    <hr></hr>
-
-                    <label for="zip">Zip:</label>
-                    <input type="text" id="zip" name="zip"></input>
+                <form class="row g-3" id="checkout-form">
+                <div class="col-md-6">
+                    <label for="inputName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="inputName"></input>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Must be like, "John Doe"
+                    </div>
                 </div>
+
+                <div class="col-md-6">
+                    <label for="inputEmail4" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="inputEmail4"></input>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Must be like, "abc@xyz.efg"
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="inputCard" class="form-label">Card</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi-credit-card-fill"></i></span>
+                        <input type="text" id="inputCard" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" aria-label="Username" aria-describedby="basic-addon1"></input>
+                        <div class="valid-feedback">
+                        Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                        Must be like, "7777-7777-7777-7777"
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="inputAddress" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"></input>
+                </div>
+                <div class="col-12">
+                    <label for="inputAddress2" class="form-label">Address 2</label>
+                    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"></input>
+                </div>
+                <div class="col-md-6">
+                    <label for="inputCity" class="form-label">City</label>
+                    <input type="text" class="form-control" id="inputCity"></input>
+                </div>
+                <div class="col-md-4">
+                    <label for="inputState" class="form-label">State</label>
+                    <select id="inputState" class="form-select">
+                        <option selected="">Choose...</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label for="inputZip" class="form-label">Zip</label>
+                    <input type="text" class="form-control" id="inputZip"></input>
+                </div>
+                </form>
                 <hr></hr>
                 <button type="button" variant="light" onClick={() => setPage(2)}> Buy </button>
                 <button type="button" variant="light" onClick={() => setPage(0)}> Continue Shopping</button>
