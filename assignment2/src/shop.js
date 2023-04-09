@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from "react";
 import items from "./data.json";
 
+var userInfo = {
+    fullName : '',
+    cardNumber : '',
+    city : '',
+    zip : '',
+    state : '',
+    email : '',
+    updateUser : function(fullname, cardNumber, email){
+        this.fullName = fullname;
+        this.cardNumber = cardNumber;
+        this.email = email;
+    }
+}
+
 const Shop = () => {
     const [cart, setCart] = useState([]);
     const [cartTotal, setCartTotal] = useState(0);
     const [page, setPage] = useState(0);            // 0 : Browse, 1 : Cart, 2 : Confirmation
 
-    var userInfo = {
-        fullName : '',
-        cardNumber : '',
-        city : '',
-        zip : '',
-        state : '',
-        email : ''
-    }
+
     //need to check tags again
 
     const [searchString, setSearchString] = useState("");
@@ -132,11 +139,6 @@ const Shop = () => {
         </div>
     ));
 
-    function updateUser() {
-        let name = document.getElementById("fullName");
-        userInfo.fullName = name.value;
-        setPage(2);
-    }
 
     const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
     const form = document.getElementById('checkout-form')
@@ -189,6 +191,10 @@ const Shop = () => {
         //for (const [key, value] of Object.entries(userInfo)) {
         //}
         //summaryCard.classList.remove("collapse")
+           /* Object.assign(userInfo.card, card.value);
+            Object.assign(userInfo.fullName, name.value);
+            Object.assign(userInfo.email, email.value);*/
+            userInfo.updateUser(name.value, card.value, email.value);
         }
         if(val){
             setPage(2);
