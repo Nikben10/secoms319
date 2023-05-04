@@ -55,7 +55,7 @@ function App() {
                 <img className="img-fluid" src={el.imageName} alt={el.alt} onClick={() => {setPage(3); getOneProduct(el.id);}}/>
             </div>
             <div className="col">
-                <div className="row text-muted" onClick={() => {setPage(4); getOneProduct(el.id);}}>{el.name}</div>
+                <div className="row text-muted" onClick={() => {setPage(4); getOneProduct(el._id);}}>{el.name}</div>
                 <div className="row">{el.shortDescription}</div>
             </div>
             <div className="col">
@@ -131,6 +131,14 @@ function App() {
   const showOneItem = oneProduct.map((el) => (
     <div>
         <img className="img-fluid" src={el.imageName}></img>
+        <div>
+            <h1><b>{el.name}</b></h1>
+            <p>{el.longDescription}</p>
+            <p color="green">{el.price}</p>
+        </div>
+        How many should we add to cart?
+        <p><button type="button" variant="light"> + </button><p>0</p>
+        <button type="button" variant="light"> - </button></p>
     </div>
   ));
 
@@ -148,6 +156,7 @@ function App() {
       });
     } else {
       console.log("Wrong number of Product id.");
+      console.log('We sent %d', id);
       setOneProduct([]);
     }
   }
