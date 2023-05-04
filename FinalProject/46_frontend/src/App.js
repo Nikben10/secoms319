@@ -118,16 +118,24 @@ function App() {
   }
 
   const showOneItem = oneProduct.map((el) => (
-    <div>
-        <img className="img-fluid" src={"http://127.0.0.1:4000/images/" + el.imageName}></img>
-        <div>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <img className="img-fluid" src={"http://127.0.0.1:4000/images/" + el.imageName}></img>
+        </header>
+        <main class="px-3">
             <h1><b>{el.name}</b></h1>
-            <p>{el.longDescription}</p>
-            <p color="green">{el.price}</p>
-        </div>
-        How many should we add to cart?
-        <p><button type="button" variant="light"> + </button><p>0</p>
-        <button type="button" variant="light"> - </button></p>
+                    <p>{el.longDescription}</p>
+                    <p color="green">{el.price}</p>
+        </main>
+
+        <footer class="mt-auto text-white-50">
+            <div className="bs-light-text-emphasis">How many should we add to cart?</div>
+            <div class="row g-0 text-center">
+                <div class="col-sm-4 col-md-4"><button type="button" variant="light"> - </button></div>
+                <div class="col-sm-4 col-md-4">0</div>
+                <div class="col-4 col-md-4"><button type="button" variant="light"> + </button></div>
+            </div>
+        </footer>
     </div>
   ));
 
@@ -380,9 +388,9 @@ if (page == 0) {
   );
 } else{
     return(
-        <div>
-            <button type="button" variant="light" onClick={() => {setPage(0)}}>Keep Browsing</button>
+        <div class="d-flex h-200 text-center text-bg-dark">
             <div>{showOneItem}</div>
+            <button type="button" variant="light" class="d-flex h-100 text-right" onClick={() => {setPage(0)}}>Keep Browsing</button>
         </div>
     )
 }
