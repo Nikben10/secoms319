@@ -33,62 +33,67 @@ app.get("/:id", async (req, resp) => {
     resp.send(oneProduct);
 });
 
-// app.get("/:id/:newPrice", async (req, res) => {
-//     try {
-//         // await formData.save();
-//         const filter = { _id: req.params.id };
-//         const update = { price: Number(req.params.newPrice) };
-//         console.log("New price: update");
-//         await Product.findOneAndUpdate(filter, update);
-//         const messageResponse = { message: `Product ${req.params.id} updated correctly`};
-//         res.send(JSON.stringify(messageResponse));
-//     } catch (err) {
-//         console.log("Error while updating a product:" + err);
-//     }
-// });
+app.put("/:id/:newQuantity", async (req, res) => {
+    try {
+        // await formData.save();
+        const filter = { _id: req.params.id };
+        const update = { quantity: Number(req.params.newQuantity) };
+        console.log("New quantity: update");
+        await Product.findOneAndUpdate(filter, update);
+        const messageResponse = { message: `Product ${req.params.id} updated correctly`};
+        res.send(JSON.stringify(messageResponse));
+    } catch (err) {
+        console.log("Error while updating a product:" + err);
+    }
+});
 
-// app.post("/insert", async (req, res) => {
-//     console.log(req.body);
-//     const p_id = req.body._id;
-//     const ptitle = req.body.title;
-//     const pprice = req.body.price;
-//     const pdescription = req.body.description;
-//     const pcategory = req.body.category;
-//     const pimage = req.body.image;
-//     const prate = req.body.rating.rate;
-//     const pcount = req.body.rating.count;
-//     const formData = new Product({
-//         _id: p_id,
-//         title: ptitle,
-//         price: pprice,
-//         description: pdescription,
-//         category: pcategory,
-//         image: pimage,
-//         rating: { rate: prate, count: pcount },
-//     });
-//     try {
-//         // await formData.save();
-//         await Product.create(formData);
-//         const messageResponse = { message: `Product ${p_id} added correctly` };
-//         res.send(JSON.stringify(messageResponse));
-//     } catch (err) {
-//         console.log("Error while adding a new product:" + err);
-//     }
-// });
+app.post("/insert", async (req, res) => {
+    console.log(req.body);
+    const p_id = req.body._id;
+    const pname = req.body.name;
+    const pprice = req.body.price;
+    const pquantity = req.body.quantity;
+    const pshortdescription = req.body.shortdescription;
+    const plongdescription = req.body.longdescription;
+    const pcategory = req.body.category;
+    const pimagename = req.body.imagename;
+    const palt = req.body.alt;
+    const pscreensize = req.body.screensize;
+    const formData = new Product({
+        _id: p_id,
+        name: pname,
+        price: pprice,
+        shortDescription: pshortdescription,
+        longDescription: plongdescription,
+        category: pcategory,
+        imageName: pimagename,
+        quantity: pquantity,
+        alt: palt,
+        screenSize: pscreensize
+    });
+    try {
+        // await formData.save();
+        await Product.create(formData);
+        const messageResponse = { message: `Product ${p_id} added correctly` };
+        res.send(JSON.stringify(messageResponse));
+    } catch (err) {
+        console.log("Error while adding a new product:" + err);
+    }
+});
 
-// app.delete("/delete", async (req, res) => {
-//     console.log("Delete :", req.body);
-//     try {
-//         const query = { _id: req.body._id };
-//         await Product.deleteOne(query);
-//         const messageResponse = {
-//             message: `Product ${req.body._id} deleted correctly`,
-//         };
-//         res.send(JSON.stringify(messageResponse));
-//     } catch (err) {
-//         console.log("Error while deleting :" + p_id + " " + err);
-//     }
-// });
+app.delete("/delete", async (req, res) => {
+    console.log("Delete :", req.body);
+    try {
+        const query = { _id: req.body._id };
+        await Product.deleteOne(query);
+        const messageResponse = {
+            message: `Product ${req.body._id} deleted correctly`,
+        };
+        res.send(JSON.stringify(messageResponse));
+    } catch (err) {
+        console.log("Error while deleting :" + p_id + " " + err);
+    }
+});
 
 const port = process.env.PORT || 4000;
 const host = "localhost";
