@@ -10,6 +10,7 @@ const ReactFormDataSchema = new mongoose.Schema({
         imageName: {type: String},
         alt: {type: String},
         screenSize: {type: Number},
+        quantity: {type: Number}
     },
     { 
     collection: "finalProject319"

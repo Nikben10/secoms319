@@ -33,7 +33,7 @@ app.get("/:id", async (req, resp) => {
     resp.send(oneProduct);
 });
 
-app.put("/:id/:newQuantity", async (req, res) => {
+app.get("/:id/:newQuantity", async (req, res) => {
     try {
         // await formData.save();
         const filter = { _id: req.params.id };
