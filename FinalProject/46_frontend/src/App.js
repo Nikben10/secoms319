@@ -210,7 +210,9 @@ const alert = (message, type) => {
 
 
 if (page == 0) {
-  getAllProducts();
+    if(product.length < 1){
+        getAllProducts();
+    }
   return (
   <div>
       Computer Store Inventory
@@ -310,7 +312,7 @@ if (page == 0) {
           <button type="button" variant="light" onClick={() => setPage(0)}> Continue Shopping</button>
       </div>
   );
-}else {
+}else if (page == 2){
   return (
   <div>
       Order Confirmation
@@ -341,6 +343,12 @@ if (page == 0) {
       </div>
   </div>
   );
+} else{
+    return(
+        <div>
+            <button type="button" variant="light" onClick={() => {setPage(0)}}>Keep Browsing</button>
+        </div>
+    )
 }
 }
 
