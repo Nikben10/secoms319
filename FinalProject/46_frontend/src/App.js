@@ -15,6 +15,9 @@ var userInfo = {
   }
 }
 
+let lowQuantity = 'red';
+let normQuantity = 'grey';
+
 function App() {
   const [product, setProduct] = useState([]);
   const [cart, setCart] = useState([]);
@@ -57,6 +60,9 @@ function App() {
             <div className="col">
                 <button type="button" variant="light" onClick={() => removeFromCart(el)} > - </button>{" "}
                 <button type="button" variant="light" onClick={() => addToCart(el)}> + </button>
+                <p style={{color: el.quantity > 5 ? normQuantity : lowQuantity}}>
+                    Qty: {el.quantity}
+                </p>
             </div>
             <div className="col">
                 ${el.price} <span className="close">&#10005;</span>{howManyofThis(el)}
@@ -67,7 +73,7 @@ function App() {
 
   function howManyofThis(el) {
     if (cart.includes(el)) {
-        return el.quantity;
+        return el.cartQty;
     } else {
         return 0;
     }
@@ -80,27 +86,33 @@ function App() {
   const total = () => {
     let totalVal = 0.00;
     for (let i = 0; i < cart.length; i++) {
-        totalVal += Number(cart[i].price) * cart[i].quantity;
+        totalVal += Number(cart[i].price) * cart[i].cartQty;
     }
     setCartTotal(totalVal.toFixed(2));
   };
 
   const addToCart = (el) => {
     let hardCopy = [...cart];
-    if (hardCopy.includes(el)) {
-        el.quantity += 1;
+    if (!hardCopy.includes(el) || el.cartQty < el.quantity) {
+        if (hardCopy.includes(el)) {
+            el.cartQty += 1;
+        } else {
+            el["cartQty"] = 1;
+            hardCopy.push(el);
+        }
+        setCart(hardCopy);
     } else {
-        el["quantity"] = 1;
-        hardCopy.push(el);
+        // let p = document.getElementById('quan' + el.quantity);
+        // p
+        // Was gonna make the quantity text flash ^
     }
-    setCart(hardCopy);
   };
 
   const removeFromCart = (el) => {
     let hardCopy = [...cart];
     if (hardCopy.includes(el)) {
-        el.quantity -= 1;
-        if (el.quantity == 0) {
+        el.cartQty -= 1;
+        if (el.cartQty == 0) {
             hardCopy.splice(hardCopy.indexOf(el), 1);
         }
     }
@@ -110,7 +122,7 @@ function App() {
   function totalProducts() {
     let total = 0;
     for (let i of cart) {
-        total += i.quantity;
+        total += i.cartQty;
     }
     return total;
   }
@@ -128,7 +140,7 @@ function App() {
                 <button type="button" variant="light" onClick={() => removeFromCart(el)} > - </button>{" "}
             </div>
             <div className="col">
-                ${el.price} <span className="close">&#10005;</span> {el.quantity} = {(el.price * el.quantity).toFixed(2)}
+                ${el.price} <span className="close">&#10005;</span> {el.cartQty} = {(el.price * el.cartQty).toFixed(2)}
             </div>
         </div>
     </div>
@@ -144,11 +156,45 @@ const checkoutedItems = cart.map((el) => (
               <div className="row text-muted">{el.name}</div>
           </div>
           <div className="col">
-              ${el.price} <span className="close">&#10005;</span> {el.quantity} = {(el.price * el.quantity).toFixed(2)}
+              ${el.price} <span className="close">&#10005;</span> {el.cartQty} = {(el.price * el.cartQty).toFixed(2)}
           </div>
       </div>
   </div>
 ));
+
+function buyItems(cart) {
+    cart.forEach(el => {
+        let newQuantity = el.quantity - el.cartQty;
+        if (newQuantity > 0) {
+            // Update the quantity of the product
+            fetch("http://localhost:4000/" + el._id + "/" + newQuantity)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Updated quantity :");
+                console.log(data);
+                // if (product != data) {
+                    // setProduct(data);
+                // }
+            });
+        } else {
+            // Delete the product
+            fetch("http://localhost:4000/delete/", {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ _id: el._id }),
+            })
+            // fetch("http://localhost:4000/" + el._id + "/" + newQuantity)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Deleted prooduct : " + el._id);
+                console.log(data);
+                // if (product != data) {
+                    // setProduct(data);
+                // }
+            });
+        }
+    });
+}
 
 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
 const form = document.getElementById('checkout-form');
@@ -336,7 +382,7 @@ if (page == 0) {
                   <p className ="mb-0 me-5 d-flex align-items-center">
                       <span className ="small text-muted me-2">Order total:</span>
                       <span className ="lead fw-normal">${cartTotal}</span> 
-                      <button type="button" variant="light" onClick={() => {setCart([]); setPage(0)}}> Keep Browsing </button>
+                      <button type="button" variant="light" onClick={() => {buyItems(cart); setCart([]); setPage(0)}}> Keep Browsing </button>
                   </p>
               </div>
           </div>
