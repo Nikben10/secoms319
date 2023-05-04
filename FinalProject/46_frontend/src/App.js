@@ -48,7 +48,7 @@ function App() {
     <div className="row border-top border-bottom" key={el.id}>
         <div className="row main align-items-center">
             <div className="col-2">
-                <img className="img-fluid" src={"http://127.0.0.1:4000/images/" + el.imageName} alt={el.alt}/>
+                <img className="img-fluid" src={el.imageName} alt={el.alt}/>
             </div>
             <div className="col">
                 <div className="row text-muted">{el.name}</div>
@@ -119,7 +119,7 @@ function App() {
     <div className="row border-top border-bottom" key={el.id}>
         <div className="row main align-items-center">
             <div className="col-2">
-                <img className="img-fluid" src={"http://127.0.0.1:4000/images/" + el.imageName} />
+                <img className="img-fluid" src={el.imageName} />
             </div>
             <div className="col">
                 <div className="row text-muted">{el.name}</div>
@@ -138,7 +138,7 @@ const checkoutedItems = cart.map((el) => (
   <div className="row border-top border-bottom" key={el.id}>
       <div className="row main align-items-center">
           <div className="col-2">
-              <img className="img-fluid" src={"http://127.0.0.1:4000/images/" + el.imageName} />
+              <img className="img-fluid" src={el.imageName} />
           </div>
           <div className="col">
               <div className="row text-muted">{el.name}</div>

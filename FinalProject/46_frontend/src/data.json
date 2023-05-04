@@ -5,7 +5,7 @@
     "category": "Laptop",
     "shortDescription" : "2-in-1 laptop with Intel Core i5-1235U (10-core), 512 GB SSD",
     "longDescription" : "This 2-in-1 laptop has it all with an i5 Intel Core processor with up to 4.4 GHz and 10 cores, 512GB SSD storage, and Windows 11.",
-    "imageName" : "hp_spectre_x360_13.5.jpeg",
+    "imageName" : "http://127.0.0.1:4000/images/hp_spectre_x360_13.5.jpeg",
     "screenSize" : 13.5,
     "alt" : "HP Spectre x360",
     "quantity" : 56
@@ -17,7 +17,7 @@
     "category": "Laptop",
     "shortDescription" : "Laptop with Intel Core i5-1235U (10-core), 512 GB SSD",
     "longDescription" : "This laptop has most of it with an i5 Intel Core processor with up to 4.4 GHz and 10 cores, 512GB SSD storage, and Windows 11.",
-    "imageName" : "hp_envy_x360_13.3.jpeg",
+    "imageName" : "http://127.0.0.1:4000/images/hp_envy_x360_13.3.jpeg",
     "screenSize" : 13.3,
     "alt" : "HP Envy x360",
     "quantity" : 124
@@ -29,7 +29,7 @@
     "category": "Laptop",
     "shortDescription" : "Laptop with Intel Core i5-12500H (12-core), 512 GB SSD, and 16GB of DDR5 RAM",
     "longDescription" : "This laptop has it all with an i5 Intel Core processor with up to 4.5 GHz and 12 cores, 512GB SSD storage, and Windows 11.",
-    "imageName" : "hp_envy_16.jpeg",
+    "imageName" : "http://127.0.0.1:4000/images/hp_envy_16.jpeg",
     "screenSize" : 16,
     "alt" : "HP Envy",
     "quantity" : 83
@@ -41,7 +41,7 @@
     "category": "Laptop",
     "shortDescription" : "Laptop with Intel Core i3-1215U (6-core), 256 GB SSD",
     "longDescription" : "This laptop has some of it with an i3 Intel Core processor with up to 4.4 GHz and 6 cores, 256GB SSD storage, and Windows 11.",
-    "imageName" : "hp_pavilion_14.jpeg",
+    "imageName" : "http://127.0.0.1:4000/images/hp_pavilion_14.jpeg",
     "screenSize" : 14,
     "alt" : "HP Pavilion",
     "quantity" : 77
@@ -53,7 +53,7 @@
     "category": "Laptop",
     "shortDescription" : "Laptop with Intel Core i5-1235U (10-core), 256 GB SSD",
     "longDescription" : "This laptop has some of it with an i5 Intel Core processor with up to 4.4 GHz and 10 cores, 256GB SSD storage, and Windows 11.",
-    "imageName" : "hp_14_laptop.jpeg",
+    "imageName" : "http://127.0.0.1:4000/images/hp_14_laptop.jpeg",
     "screenSize" : "14",
     "alt" : "HP 14\" laptop",
     "quantity" : 54
@@ -65,7 +65,7 @@
     "category": "Laptop",
     "shortDescription" : "Laptop with Intel Core i3-12500H (12-core), 512 GB SSD",
     "longDescription" : "This laptop has some of it with an i3 Intel Core processor with up to 4.5 GHz and 12 cores, 512GB SSD storage, and Windows 11.",
-    "imageName" : "hp_omen_16.jpeg",
+    "imageName" : "http://127.0.0.1:4000/images/hp_omen_16.jpeg",
     "screenSize" : 16,
     "alt" : "HP Omen",
     "quantity" : 18
@@ -77,7 +77,7 @@
     "category": "All-in-One",
     "shortDescription" : "All-in-One desktop with Intel Core i5-12500H (12-core), 1TB SSD",
     "longDescription" : "This All-in-One desktop has some of it with an i5 Intel Core processor with up to 4.5 GHz and 12 cores, 1TB SSD storage, and Windows 11.",
-    "imageName" : "hp_chromebase_22.jpeg",
+    "imageName" : "http://127.0.0.1:4000/images/hp_chromebase_22.jpeg",
     "screenSize" : 22,
     "alt" : "HP Chromebase All-in-One",
     "quantity" : 27
@@ -89,7 +89,7 @@
     "category": "Desktop",
     "shortDescription" : "Desktop with Intel Core i5, 1 TB HDD, NVIDIA 15",
     "longDescription" : "This desktop has most of it with an i5 Intel Core processor with an NVIDIA GeForce 1660 Super, 1TB HDD storage, and Windows 11.",
-    "imageName" : "hp_envy_desktop.jpeg",
+    "imageName" : "http://127.0.0.1:4000/images/hp_envy_desktop.jpeg",
     "screenSize" : -1,
     "alt" : "HP Envy Desktop",
     "quantity" : 12
@@ -101,7 +101,7 @@
     "category": "Desktop",
     "shortDescription" : "Desktop with Intel Core i7, 2TB HDD, 512GB SSD",
     "longDescription" : "This laptop has it all with an i7 Intel Core processor, 2TB HDD and 512GB SSD storage, and Windows 11.",
-    "imageName" : "hp_pavilion_desktop.jpeg",
+    "imageName" : "http://127.0.0.1:4000/images/hp_pavilion_desktop.jpeg",
     "screenSize" : -1,
     "alt" : "HP Pavilion Desktop",
     "quantity" : 909
@@ -113,7 +113,7 @@
     "category": "Desktop",
     "shortDescription" : "Desktop with Intel Core i5-12400 (6-core), 256 GB SSD",
     "longDescription" : "This desktop has some of it with an i5 Intel Core processor with up to 4.4 GHz and 6 cores, 256GB SSD storage, and Windows 11.",
-    "imageName" : "hp_omen_desktop.jpeg",
+    "imageName" : "http://127.0.0.1:4000/images/hp_omen_desktop.jpeg",
     "screenSize" : -1,
     "alt" : "HP Omen 25L 2020",
     "quantity" : 41
@@ -125,7 +125,7 @@
     "category": "Desktop",
     "shortDescription" : "Desktop with Intel Core i5-12400 (12-core), 256 GB SSD",
     "longDescription" : "This desktop has some of it with an i5 Intel Core processor with up to 4.4 GHz and 12 cores, 256GB SSD storage, and Windows 11.",
-    "imageName" : "hp_victus_desktop.jpeg",
+    "imageName" : "http://127.0.0.1:4000/images/hp_victus_desktop.jpeg",
     "screenSize" : -1,
     "alt" : "HP Victus 15",
     "quantity" : 5
@@ -137,7 +137,7 @@
     "category": "All-in-One",
     "shortDescription" : "All-in-One with Intel Core i3-13100T (4-core), 256 GB SSD",
     "longDescription" : "This All-in-One desktop has it all with an i3 Intel Core processor with up to 4.2 GHz and 4 cores, 256GB SSD storage, and Windows 11.",
-    "imageName" : "hp_24_AiO.jpeg",
+    "imageName" : "http://127.0.0.1:4000/images/hp_24_AiO.jpeg",
     "screenSize" : "24",
     "alt" : "HP 24 All-in-One",
     "quantity" : 74
