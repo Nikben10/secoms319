@@ -52,7 +52,7 @@ function App() {
     <div className="row border-top border-bottom" key={el._id}>
         <div className="row main align-items-center">
             <div className="col-2">
-                <img className="img-fluid" src={el.imageName} alt={el.alt} onClick={() => {setPage(3); getOneProduct(el.id);}}/>
+                <img className="img-fluid" src={el.imageName} alt={el.alt} onClick={() => {setPage(3); getOneProduct(el._id);}}/>
             </div>
             <div className="col">
                 <div className="row text-muted" onClick={() => {setPage(4); getOneProduct(el._id);}}>{el.name}</div>
@@ -129,22 +129,22 @@ function App() {
   }
 
   const showOneItem = oneProduct.map((el) => (
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-        <header class="mb-auto">
+    <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header className="mb-auto">
             <img className="img-fluid" src={el.imageName}></img>
         </header>
-        <main class="px-3">
+        <main className="px-3">
             <h1><b>{el.name}</b></h1>
                     <p>{el.longDescription}</p>
                     <p color="green">{el.price}</p>
         </main>
 
-        <footer class="mt-auto text-white-50">
+        <footer className="mt-auto text-white-50">
             <div className="bs-light-text-emphasis">How many should we add to cart?</div>
-            <div class="row g-0 text-center">
-                <div class="col-sm-4 col-md-4"><button type="button" variant="light"> - </button></div>
-                <div class="col-sm-4 col-md-4">0</div>
-                <div class="col-4 col-md-4"><button type="button" variant="light"> + </button></div>
+            <div className="row g-0 text-center">
+                <div className="col-sm-4 col-md-4"><button type="button" variant="light"> - </button></div>
+                <div className="col-sm-4 col-md-4">0</div>
+                <div className="col-4 col-md-4"><button type="button" variant="light"> + </button></div>
             </div>
         </footer>
     </div>
@@ -437,9 +437,9 @@ if (page == 0) {
   );
 } else{
     return(
-        <div class="d-flex h-200 text-center text-bg-dark">
+        <div className="d-flex h-200 text-center text-bg-dark">
             <div>{showOneItem}</div>
-            <button type="button" variant="light" class="d-flex h-100 text-right" onClick={() => {setPage(0)}}>Keep Browsing</button>
+            <button type="button" variant="light" className="d-flex h-100 text-right" onClick={() => {setPage(0)}}>Keep Browsing</button>
         </div>
     )
 }
