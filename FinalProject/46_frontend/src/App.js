@@ -15,6 +15,9 @@ var userInfo = {
   }
 }
 
+let lowQuantity = 'red';
+let normQuantity = 'grey';
+
 function App() {
   const [product, setProduct] = useState([]);
   const [cart, setCart] = useState([]);
@@ -49,8 +52,7 @@ function App() {
     <div className="row border-top border-bottom" key={el._id}>
         <div className="row main align-items-center">
             <div className="col-2">
-                <img className="img-fluid" src={"http://127.0.0.1:4000/images/" + el.imageName} alt={el.alt} onClick={() => {setPage(3);
-                                                                                                                            getOneProduct(el._id);}}/>
+                <img className="img-fluid" src={el.imageName} alt={el.alt} onClick={() => {setPage(3); getOneProduct(el.id);}}/>
             </div>
             <div className="col">
                 <div className="row text-muted" onClick={() => {setPage(4); getOneProduct(el._id);}}>{el.name}</div>
@@ -59,6 +61,9 @@ function App() {
             <div className="col">
                 <button type="button" variant="light" onClick={() => removeFromCart(el)} > - </button>{" "}
                 <button type="button" variant="light" onClick={() => addToCart(el)}> + </button>
+                <p style={{color: el.quantity > 5 ? normQuantity : lowQuantity}}>
+                    Qty: {el.quantity}
+                </p>
             </div>
             <div className="col">
                 ${el.price} <span className="close">&#10005;</span>{howManyofThis(el)}
@@ -69,7 +74,7 @@ function App() {
 
   function howManyofThis(el) {
     if (cart.includes(el)) {
-        return el.quantity;
+        return el.cartQty;
     } else {
         return 0;
     }
@@ -82,27 +87,33 @@ function App() {
   const total = () => {
     let totalVal = 0.00;
     for (let i = 0; i < cart.length; i++) {
-        totalVal += Number(cart[i].price) * cart[i].quantity;
+        totalVal += Number(cart[i].price) * cart[i].cartQty;
     }
     setCartTotal(totalVal.toFixed(2));
   };
 
   const addToCart = (el) => {
     let hardCopy = [...cart];
-    if (hardCopy.includes(el)) {
-        el.quantity += 1;
+    if (!hardCopy.includes(el) || el.cartQty < el.quantity) {
+        if (hardCopy.includes(el)) {
+            el.cartQty += 1;
+        } else {
+            el["cartQty"] = 1;
+            hardCopy.push(el);
+        }
+        setCart(hardCopy);
     } else {
-        el["quantity"] = 1;
-        hardCopy.push(el);
+        // let p = document.getElementById('quan' + el.quantity);
+        // p
+        // Was gonna make the quantity text flash ^
     }
-    setCart(hardCopy);
   };
 
   const removeFromCart = (el) => {
     let hardCopy = [...cart];
     if (hardCopy.includes(el)) {
-        el.quantity -= 1;
-        if (el.quantity == 0) {
+        el.cartQty -= 1;
+        if (el.cartQty == 0) {
             hardCopy.splice(hardCopy.indexOf(el), 1);
         }
     }
@@ -112,7 +123,7 @@ function App() {
   function totalProducts() {
     let total = 0;
     for (let i of cart) {
-        total += i.quantity;
+        total += i.cartQty;
     }
     return total;
   }
@@ -120,7 +131,7 @@ function App() {
   const showOneItem = oneProduct.map((el) => (
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="mb-auto">
-            <img className="img-fluid" src={"http://127.0.0.1:4000/images/" + el.imageName}></img>
+            <img className="img-fluid" src={el.imageName}></img>
         </header>
         <main class="px-3">
             <h1><b>{el.name}</b></h1>
@@ -171,7 +182,7 @@ function App() {
                 <button type="button" variant="light" onClick={() => removeFromCart(el)} > - </button>{" "}
             </div>
             <div className="col">
-                ${el.price} <span className="close">&#10005;</span> {el.quantity} = {(el.price * el.quantity).toFixed(2)}
+                ${el.price} <span className="close">&#10005;</span> {el.cartQty} = {(el.price * el.cartQty).toFixed(2)}
             </div>
         </div>
     </div>
@@ -187,11 +198,46 @@ const checkoutedItems = cart.map((el) => (
               <div className="row text-muted">{el.name}</div>
           </div>
           <div className="col">
-              ${el.price} <span className="close">&#10005;</span> {el.quantity} = {(el.price * el.quantity).toFixed(2)}
+              ${el.price} <span className="close">&#10005;</span> {el.cartQty} = {(el.price * el.cartQty).toFixed(2)}
           </div>
       </div>
   </div>
 ));
+
+function buyItems(cart) {
+    cart.forEach(el => {
+        let newQuantity = el.quantity - el.cartQty;
+        if (newQuantity > 0) {
+            // Update the quantity of the product
+            console.log("Updating id : " + el._id + " to have quantity : " + newQuantity);
+            fetch("http://localhost:4000/" + el._id + "/" + newQuantity)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Updated quantity :");
+                console.log(data);
+                // if (product != data) {
+                    // setProduct(data);
+                // }
+            });
+        } else {
+            // Delete the product
+            fetch("http://localhost:4000/delete/", {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ _id: el._id }),
+            })
+            // fetch("http://localhost:4000/" + el._id + "/" + newQuantity)
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("Deleted prooduct : " + el._id);
+                console.log(data);
+                // if (product != data) {
+                    // setProduct(data);
+                // }
+            });
+        }
+    });
+}
 
 const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
 const form = document.getElementById('checkout-form');
@@ -230,6 +276,7 @@ let validate = function(){
       userInfo.updateUser(name.value, card.value, email.value);
   }
   if(val){
+        buyItems(cart); 
       setPage(2);
   }
   else{
@@ -298,56 +345,56 @@ if (page == 0) {
           <div>{cartItems}</div>
           <hr></hr>
           <div id="liveAlertPlaceholder"></div>
-          <form class="row g-3" id="checkout-form">
-              <div class="col-md-6">
-                  <label for="inputName" class="form-label">Full Name</label>
-                  <input type="text" class="form-control" id="inputName"></input>
-                  <div class="valid-feedback">
+          <form className="row g-3" id="checkout-form">
+              <div className="col-md-6">
+                  <label htmlFor="inputName" className="form-label">Full Name</label>
+                  <input type="text" className="form-control" id="inputName"></input>
+                  <div className="valid-feedback">
                       Looks good!
                   </div>
-                  <div class="invalid-feedback">
+                  <div className="invalid-feedback">
                       Must be like, "John Doe"
                   </div>
               </div>
 
-              <div class="col-md-6">
-                  <label for="inputEmail4" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="inputEmail4"></input>
-                  <div class="invalid-feedback">
+              <div className="col-md-6">
+                  <label htmlFor="inputEmail4" className="form-label">Email</label>
+                  <input type="email" className="form-control" id="inputEmail4"></input>
+                  <div className="invalid-feedback">
                       Must be like, "abc@xyz.efg"
                   </div>
               </div>
 
-              <div class="col-12">
-                  <label for="inputCard" class="form-label">Card</label>
-                  <div class="input-group mb-3">
-                      <span class="input-group-text" id="basic-addon1"><i class="bi-credit-card-fill"></i></span>
-                      <input type="text" id="inputCard" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" aria-label="Username" aria-describedby="basic-addon1"></input>
-                      <div class="invalid-feedback">
+              <div className="col-12">
+                  <label htmlFor="inputCard" className="form-label">Card</label>
+                  <div className="input-group mb-3">
+                      <span className="input-group-text" id="basic-addon1"><i className="bi-credit-card-fill"></i></span>
+                      <input type="text" id="inputCard" className="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" aria-label="Username" aria-describedby="basic-addon1"></input>
+                      <div className="invalid-feedback">
                       Must be like, "7777-7777-7777-7777"
                       </div>
                   </div>
               </div>
 
-              <div class="col-12">
-                  <label for="inputAddress" class="form-label">Address</label>
-                  <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"></input>
+              <div className="col-12">
+                  <label htmlFor="inputAddress" className="form-label">Address</label>
+                  <input type="text" className="form-control" id="inputAddress" placeholder="1234 Main St"></input>
               </div>
-              <div class="col-12">
-                  <label for="inputAddress2" class="form-label">Address 2</label>
-                  <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"></input>
+              <div className="col-12">
+                  <label htmlFor="inputAddress2" className="form-label">Address 2</label>
+                  <input type="text" className="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor"></input>
               </div>
-              <div class="col-md-6">
-                  <label for="inputCity" class="form-label">City</label>
-                  <input type="text" class="form-control" id="inputCity"></input>
+              <div className="col-md-6">
+                  <label htmlFor="inputCity" className="form-label">City</label>
+                  <input type="text" className="form-control" id="inputCity"></input>
               </div>
-              <div class="col-md-4">
-                  <label for="inputState" class="form-label">State</label>
-                  <input type="text" class="form-control" id="inputCity"></input>
+              <div className="col-md-4">
+                  <label htmlFor="inputState" className="form-label">State</label>
+                  <input type="text" className="form-control" id="inputCity"></input>
               </div>
-              <div class="col-md-2">
-                  <label for="inputZip" class="form-label">Zip</label>
-                  <input type="text" class="form-control" id="inputZip"></input>
+              <div className="col-md-2">
+                  <label htmlFor="inputZip" className="form-label">Zip</label>
+                  <input type="text" className="form-control" id="inputZip"></input>
               </div>
           </form>
           <hr></hr>
@@ -379,7 +426,7 @@ if (page == 0) {
                   <p className ="mb-0 me-5 d-flex align-items-center">
                       <span className ="small text-muted me-2">Order total:</span>
                       <span className ="lead fw-normal">${cartTotal}</span> 
-                      <button type="button" variant="light" onClick={() => {setCart([]); setPage(0)}}> Keep Browsing </button>
+                      <button type="button" variant="light" onClick={() => {getAllProducts(); setCart([]); setPage(0)}}> Keep Browsing </button>
                   </p>
               </div>
           </div>
