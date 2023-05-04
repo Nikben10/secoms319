@@ -23,6 +23,20 @@ function App() {
 
   const [searchString, setSearchString] = useState("");
 
+  function getAllProducts() {
+    fetch("http://localhost:4000/")
+    .then((response) => response.json())
+    .then((data) => {
+        console.log("Show Catalog of Products :");
+        console.log(data);
+        if (product != data) {
+            setProduct(data);
+        }
+    });
+  }
+
+  let itemsCopy = product; //need to fix items
+
   if (searchString.length > 0) {
     itemsCopy = product.filter((item) => {
         return product.name.toUpperCase().includes(searchString.toUpperCase()) ||
@@ -30,26 +44,11 @@ function App() {
     });
   }
 
-
-
-  function getAllProducts() {
-    fetch("http://localhost:4000/")
-    .then((response) => response.json())
-    .then((data) => {
-        console.log("Show Catalog of Products :");
-        console.log(data);
-        setProduct(data);
-    });
-    setPage(0);
-  }
-
-  let itemsCopy = product; //need to fix items
-
   const listItems = itemsCopy.map((el) => (
     <div className="row border-top border-bottom" key={el.id}>
         <div className="row main align-items-center">
             <div className="col-2">
-                <img className="img-fluid" src={el.imageName} />
+                <img className="img-fluid" src={el.imageName} alt={el.alt}/>
             </div>
             <div className="col">
                 <div className="row text-muted">{el.name}</div>
