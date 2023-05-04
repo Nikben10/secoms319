@@ -210,7 +210,9 @@ function buyItems(cart) {
         if (newQuantity > 0) {
             // Update the quantity of the product
             console.log("Updating id : " + el._id + " to have quantity : " + newQuantity);
-            fetch("http://localhost:4000/" + el._id + "/" + newQuantity)
+            fetch("http://localhost:4000/" + el._id + "/" + newQuantity, {
+                method: "PUT"
+            })
             .then((response) => response.json())
             .then((data) => {
                 console.log("Updated quantity :");
