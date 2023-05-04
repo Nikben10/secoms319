@@ -7,7 +7,8 @@
     "longDescription" : "This 2-in-1 laptop has it all with an i5 Intel Core processor with up to 4.4 GHz and 10 cores, 512GB SSD storage, and Windows 11.",
     "imageName" : "hp_spectre_x360_13.5.jpeg",
     "screenSize" : 13.5,
-    "alt" : "HP Spectre x360"
+    "alt" : "HP Spectre x360",
+    "quantity" : 56
 },
 {
     "_id": 2,
@@ -18,7 +19,8 @@
     "longDescription" : "This laptop has most of it with an i5 Intel Core processor with up to 4.4 GHz and 10 cores, 512GB SSD storage, and Windows 11.",
     "imageName" : "hp_envy_x360_13.3.jpeg",
     "screenSize" : 13.3,
-    "alt" : "HP Envy x360"
+    "alt" : "HP Envy x360",
+    "quantity" : 124
 },
 {
     "_id": 3,
@@ -29,7 +31,8 @@
     "longDescription" : "This laptop has it all with an i5 Intel Core processor with up to 4.5 GHz and 12 cores, 512GB SSD storage, and Windows 11.",
     "imageName" : "hp_envy_16.jpeg",
     "screenSize" : 16,
-    "alt" : "HP Envy"
+    "alt" : "HP Envy",
+    "quantity" : 83
 },
 {
     "_id": 4,
@@ -40,7 +43,8 @@
     "longDescription" : "This laptop has some of it with an i3 Intel Core processor with up to 4.4 GHz and 6 cores, 256GB SSD storage, and Windows 11.",
     "imageName" : "hp_pavilion_14.jpeg",
     "screenSize" : 14,
-    "alt" : "HP Pavilion"
+    "alt" : "HP Pavilion",
+    "quantity" : 77
 },
 {
     "_id": 5,
@@ -51,7 +55,8 @@
     "longDescription" : "This laptop has some of it with an i5 Intel Core processor with up to 4.4 GHz and 10 cores, 256GB SSD storage, and Windows 11.",
     "imageName" : "hp_14_laptop.jpeg",
     "screenSize" : "14",
-    "alt" : "HP 14\" laptop"
+    "alt" : "HP 14\" laptop",
+    "quantity" : 54
 },
 {
     "_id": 6,
@@ -62,7 +67,8 @@
     "longDescription" : "This laptop has some of it with an i3 Intel Core processor with up to 4.5 GHz and 12 cores, 512GB SSD storage, and Windows 11.",
     "imageName" : "hp_omen_16.jpeg",
     "screenSize" : 16,
-    "alt" : "HP Omen"
+    "alt" : "HP Omen",
+    "quantity" : 18
 },
 {
     "_id": 7,
@@ -73,7 +79,8 @@
     "longDescription" : "This All-in-One desktop has some of it with an i5 Intel Core processor with up to 4.5 GHz and 12 cores, 1TB SSD storage, and Windows 11.",
     "imageName" : "hp_chromebase_22.jpeg",
     "screenSize" : 22,
-    "alt" : "HP Chromebase All-in-One"
+    "alt" : "HP Chromebase All-in-One",
+    "quantity" : 27
 },
 {
     "_id": 8,
@@ -84,7 +91,8 @@
     "longDescription" : "This desktop has most of it with an i5 Intel Core processor with an NVIDIA GeForce 1660 Super, 1TB HDD storage, and Windows 11.",
     "imageName" : "hp_envy_desktop.jpeg",
     "screenSize" : -1,
-    "alt" : "HP Envy Desktop"
+    "alt" : "HP Envy Desktop",
+    "quantity" : 12
 },
 {
     "_id": 9,
@@ -95,7 +103,8 @@
     "longDescription" : "This laptop has it all with an i7 Intel Core processor, 2TB HDD and 512GB SSD storage, and Windows 11.",
     "imageName" : "hp_pavilion_desktop.jpeg",
     "screenSize" : -1,
-    "alt" : "HP Pavilion Desktop"
+    "alt" : "HP Pavilion Desktop",
+    "quantity" : 909
 },
 {
     "_id": 10,
@@ -106,7 +115,8 @@
     "longDescription" : "This desktop has some of it with an i5 Intel Core processor with up to 4.4 GHz and 6 cores, 256GB SSD storage, and Windows 11.",
     "imageName" : "hp_omen_desktop.jpeg",
     "screenSize" : -1,
-    "alt" : "HP Omen 25L 2020"
+    "alt" : "HP Omen 25L 2020",
+    "quantity" : 41
 },
 {
     "_id": 11,
@@ -117,7 +127,8 @@
     "longDescription" : "This desktop has some of it with an i5 Intel Core processor with up to 4.4 GHz and 12 cores, 256GB SSD storage, and Windows 11.",
     "imageName" : "hp_victus_desktop.jpeg",
     "screenSize" : -1,
-    "alt" : "HP Victus 15"
+    "alt" : "HP Victus 15",
+    "quantity" : 5
 },
 {
     "_id": 12,
@@ -128,5 +139,6 @@
     "longDescription" : "This All-in-One desktop has it all with an i3 Intel Core processor with up to 4.2 GHz and 4 cores, 256GB SSD storage, and Windows 11.",
     "imageName" : "hp_24_AiO.jpeg",
     "screenSize" : "24",
-    "alt" : "HP 24 All-in-One"
+    "alt" : "HP 24 All-in-One",
+    "quantity" : 74
 }]
