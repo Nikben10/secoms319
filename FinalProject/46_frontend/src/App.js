@@ -19,7 +19,8 @@ function App() {
   const [product, setProduct] = useState([]);
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
-  const [page, setPage] = useState(0);            // 0 : Browse, 1 : Cart, 2 : Confirmation
+  const [page, setPage] = useState(0);            // 0 : Browse, 1 : Cart, 2 : Confirmation, 3: itemView
+  const [oneProduct, setOneProduct] = useState([]);
 
   const [searchString, setSearchString] = useState("");
 
@@ -48,10 +49,11 @@ function App() {
     <div className="row border-top border-bottom" key={el.id}>
         <div className="row main align-items-center">
             <div className="col-2">
-                <img className="img-fluid" src={"http://127.0.0.1:4000/images/" + el.imageName} alt={el.alt}/>
+                <img className="img-fluid" src={"http://127.0.0.1:4000/images/" + el.imageName} alt={el.alt} onClick={() => {setPage(3);
+                                                                                                                            getOneProduct(el.id);}}/>
             </div>
             <div className="col">
-                <div className="row text-muted">{el.name}</div>
+                <div className="row text-muted" onClick={() => {setPage(4); getOneProduct(el.id);}}>{el.name}</div>
                 <div className="row">{el.shortDescription}</div>
             </div>
             <div className="col">
@@ -113,6 +115,30 @@ function App() {
         total += i.quantity;
     }
     return total;
+  }
+
+  const showOneItem = oneProduct.map((el) => (
+    <div>
+        <img className="img-fluid" src={el.image}></img>
+    </div>
+  ));
+
+  function getOneProduct(id) {
+    console.log(id);
+    if (id >= 1 && id <= 20) {
+      fetch("http://localhost:4000/" + id)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Show one product :", id);
+        console.log(data);
+        const dataArr = [];
+        dataArr.push(data);
+        setOneProduct(dataArr);
+      });
+    } else {
+      console.log("Wrong number of Product id.");
+      setOneProduct([]);
+    }
   }
 
   const cartItems = cart.map((el) => (
@@ -347,6 +373,7 @@ if (page == 0) {
     return(
         <div>
             <button type="button" variant="light" onClick={() => {setPage(0)}}>Keep Browsing</button>
+            <div>{showOneItem}</div>
         </div>
     )
 }
