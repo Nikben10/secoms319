@@ -142,9 +142,15 @@ function App() {
         <footer className="mt-auto text-white-50">
             <div className="bs-light-text-emphasis">How many should we add to cart?</div>
             <div className="row g-0 text-center">
-                <div className="col-sm-4 col-md-4"><button type="button" variant="light"> - </button></div>
-                <div className="col-sm-4 col-md-4">0</div>
-                <div className="col-4 col-md-4"><button type="button" variant="light"> + </button></div>
+                <div className="col-sm-4 col-md-4">
+                    <button type="button" variant="light" onClick={() => removeFromCart(el)}> - </button>
+                </div>
+                <div className="col-sm-4 col-md-4">
+                    {howManyofThis(el)}
+                </div>
+                <div className="col-4 col-md-4">
+                    <button type="button" variant="light" onClick={() => addToCart(el)}> + </button>
+                </div>
             </div>
         </footer>
     </div>
