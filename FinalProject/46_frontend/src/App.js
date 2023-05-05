@@ -274,8 +274,6 @@ let validate = function(){
   let card = document.getElementById('inputCard')
   
 
-  email.setAttribute("class", "form-control is-valid");
-  userInfo.email = email.value;
   if (name.value.length == 0)
   {
   name.setAttribute("class","form-control is-invalid")
@@ -285,7 +283,7 @@ let validate = function(){
   name.setAttribute("class", "form-control is-valid");
   userInfo.name = name.value;
   }
-  if (!isNaN(card.value))
+  if (!isNaN(card.value) || card.value.length < 16)
   {
   card.setAttribute("class","form-control is-invalid");
   val = false;
@@ -293,6 +291,14 @@ let validate = function(){
   else{
   card.setAttribute("class", "form-control is-valid");
   userInfo.card = card.value;
+  }
+  if (!email.value.includes("@")){
+    email.setAttribute("class", "form-control is invalid");
+    val = false;
+  }
+  else{
+    email.setAttribute("class", "form-control is-valid");
+    userInfo.email = email.value;
   }
   if (val){
       userInfo.updateUser(name.value, card.value, email.value);
@@ -417,7 +423,7 @@ if (page == 0) {
           <div id="liveAlertPlaceholder"></div>
           <form className="row g-3" id="checkout-form">
               <div className="col-md-6">
-                  <label htmlFor="inputName" className="form-label">Full Name</label>
+                  <label htmlFor="inputName" className="form-label">Full Name*</label>
                   <input type="text" className="form-control" id="inputName"></input>
                   <div className="valid-feedback">
                       Looks good!
@@ -430,13 +436,16 @@ if (page == 0) {
               <div className="col-md-6">
                   <label htmlFor="inputEmail4" className="form-label">Email</label>
                   <input type="email" className="form-control" id="inputEmail4"></input>
+                  <div className="valid-feedback">
+                      Looks good!
+                  </div>
                   <div className="invalid-feedback">
                       Must be like, "abc@xyz.efg"
                   </div>
               </div>
 
               <div className="col-12">
-                  <label htmlFor="inputCard" className="form-label">Card</label>
+                  <label htmlFor="inputCard" className="form-label">Card*</label>
                   <div className="input-group mb-3">
                       <span className="input-group-text" id="basic-addon1"><i className="bi-credit-card-fill"></i></span>
                       <input type="text" id="inputCard" className="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" aria-label="Username" aria-describedby="basic-addon1"></input>
