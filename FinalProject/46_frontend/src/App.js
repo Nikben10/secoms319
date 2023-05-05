@@ -39,7 +39,8 @@ function App() {
     });
   }
 
-  let itemsCopy = product; //need to fix items
+  let itemsCopy = product;
+
 
   if (searchString.length > 0) {
     itemsCopy = product.filter((item) => {
@@ -313,9 +314,10 @@ if (page == 0) {
     }
   return (
   <div>
-    <div className="mb-0 me-5 d-flex align-items-center">
-        <b>Computer Store Inventory</b>
-        <div className="mb-0 me-5 d-flex align-items-center">
+    <div className="row">
+        <div className="col"><b>Computer Store Inventory</b></div>
+        <div className="col"></div>
+        <div className="col">
             <b onClick={() => setPage(5)}>About us!</b>
         </div>
     </div>
