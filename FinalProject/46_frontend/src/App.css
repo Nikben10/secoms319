@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.createLabel {
+  display: inline-block;
+  width: 250px;
+  text-align: right;
+  padding: 10px;
+}

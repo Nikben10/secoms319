@@ -14,7 +14,8 @@ const ReactFormDataSchema = new mongoose.Schema({
     },
     { 
     collection: "finalProject319"
-});
+    }
+);
 
 const Product = mongoose.model('Product', ReactFormDataSchema);
 

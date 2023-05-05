@@ -24,6 +24,18 @@ function App() {
   const [cartTotal, setCartTotal] = useState(0);
   const [page, setPage] = useState(0);            // 0 : Browse, 1 : Cart, 2 : Confirmation, 3: itemView
   const [oneProduct, setOneProduct] = useState([]);
+  const [addNewProduct, setAddNewProduct] = useState({
+    _id: 0,
+    name: "",
+    price: 0.0,
+    category: "",
+    shortdescription: "",
+    longdescription: "",
+    imagename: "http://127.0.0.1:4000/images/",
+    alt: "",
+    screensize: 0.0,
+    quantity: 0,
+  });
 
   const [searchString, setSearchString] = useState("");
 
@@ -34,6 +46,7 @@ function App() {
         console.log("Show Catalog of Products :");
         console.log(data);
         if (product != data) {
+
             setProduct(data);
         }
     });
@@ -298,7 +311,48 @@ const alert = (message, type) => {
       alertPlaceholder.append(wrapper);
 }
 
+function handleChange(evt) {
+    const value = evt.target.value;
+    if (evt.target.name === "_id") {
+        setAddNewProduct({ ...addNewProduct, _id: value});
+    } else if (evt.target.name === "name") {
+        setAddNewProduct({ ...addNewProduct, name: value});
+    } else if (evt.target.name === "price") {
+        setAddNewProduct({ ...addNewProduct, price: value});
+    } else if (evt.target.name === "category") {
+        setAddNewProduct({ ...addNewProduct, category: value});
+    } else if (evt.target.name === "shortDescription") {
+        setAddNewProduct({ ...addNewProduct, shortdescription: value});
+    } else if (evt.target.name === "imageName") {
+        setAddNewProduct({ ...addNewProduct, imagename: value});
+    } else if (evt.target.name === "longDescription") {
+        setAddNewProduct({ ...addNewProduct, longdescription: value});
+    } else if (evt.target.name === "alt") {
+        setAddNewProduct({ ...addNewProduct, alt: value});
+    } else if (evt.target.name === "screenSize") {
+        setAddNewProduct({ ...addNewProduct, screensize: value});
+    } else if (evt.target.name === "quantity") {
+        setAddNewProduct({ ...addNewProduct, quantity: value});
+    }
+}
 
+function handleOnSubmit(e) {
+    e.preventDefault();
+    console.log(e.target.value);
+    fetch("http://localhost:4000/insert", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(addNewProduct),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+        console.log("Post a new product completed");
+        console.log(data);
+        if (data) {
+            setPage(0);
+        }
+    });
+}
 
 
 if (page == 0) {
@@ -323,6 +377,7 @@ if (page == 0) {
                           <div className="col align-self-center text-right text-muted">
                               Products selected {totalProducts()}
                           </div>
+                            <button type="button" variant="light" onClick={() => setPage(4)}>Create New Product</button>
                       </div>
                   </div>
                   <div>{listItems}</div>
@@ -428,18 +483,74 @@ if (page == 0) {
                   <p className ="mb-0 me-5 d-flex align-items-center">
                       <span className ="small text-muted me-2">Order total:</span>
                       <span className ="lead fw-normal">${cartTotal}</span> 
-                      <button type="button" variant="light" onClick={() => {getAllProducts(); setCart([]); setPage(0)}}> Keep Browsing </button>
+                      <button type="button" variant="light" onClick={() => {setCart([]); setPage(0)}}> Keep Browsing </button>
                   </p>
               </div>
           </div>
       </div>
   </div>
   );
-} else{
+} else if (page == 3) {
     return(
         <div className="d-flex h-200 text-center text-bg-dark">
             <div>{showOneItem}</div>
             <button type="button" variant="light" className="d-flex h-100 text-right" onClick={() => {setPage(0)}}>Keep Browsing</button>
+        </div>
+    )
+} else if (page == 4) {
+    return (
+        <div>
+          <h3>Add a new product :</h3>
+          <form action="">
+            <div className='block'>
+                <label className='createLabel'>ID</label>
+                <input type="number" placeholder="id" name="_id" value={addNewProduct._id} onChange={handleChange} />
+            </div>
+            <div className='block'>
+                <label className='createLabel'>Name</label>
+              <input type="text" placeholder="name" name="name" value={addNewProduct.name} onChange={handleChange} />
+            </div>
+            <div className='block'>
+                <label className='createLabel'>Price</label>
+              <input type="number" placeholder="price" name="price" value={addNewProduct.price} onChange={handleChange} />
+            </div>
+            <div className='block'>
+                <label className='createLabel'>Category</label>
+              <input type="text" placeholder="category" name="category" value={addNewProduct.category} onChange={handleChange} />
+            </div>
+            <div className='block'>
+                <label className='createLabel'>Short Description</label>
+              <input type="text" placeholder="Short Description" name="shortDescription" value={addNewProduct.shortdescription} onChange={handleChange} />
+            </div>
+            <div className='block'>
+                <label className='createLabel'>Long Description</label>
+              <input type="text" placeholder="Long description" name="longDescription" value={addNewProduct.longdescription} onChange={handleChange} />
+            </div>
+            <div className='block'>
+                <label className='createLabel'>Image Name (and path)</label>
+              <input type="text" placeholder="image name" name="imageName" value={addNewProduct.imagename} onChange={handleChange} />
+            </div>
+            <div className='block'>
+                <label className='createLabel'>Alt Text</label>
+              <input type="text" placeholder="alt text" name="alt" value={addNewProduct.alt} onChange={handleChange} />
+            </div>
+            <div className='block'>
+                <label className='createLabel'>Screen Size (-1 for desktop)</label>
+              <input type="number" placeholder="screen size" name="screenSize" value={addNewProduct.screensize} onChange={handleChange} />
+            </div>
+            <div className='block'>
+                <label className='createLabel'>quantity</label>
+              <input type="number" placeholder="quantity" name="quantity" value={addNewProduct.quantity} onChange={handleChange} />
+            </div>
+            <div>
+              <button type="submit" onClick={handleOnSubmit}>
+                  Submit
+              </button>
+              <button onClick={() => setPage(0)}>
+                  Cancel
+              </button>
+            </div>
+          </form>
         </div>
     )
 }
