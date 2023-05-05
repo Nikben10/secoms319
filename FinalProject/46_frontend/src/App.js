@@ -153,8 +153,8 @@ function App() {
                     <p color="green">{el.price}</p>
         </main>
 
-        <footer className="mt-auto text-white-50">
-            <div className="bs-light-text-emphasis">How many should we add to cart?</div>
+        <footer>
+            <div><p>How many should we add to cart?</p></div>
             <div className="row g-0 text-center">
                 <div className="col-sm-4 col-md-4">
                     <button type="button" variant="light" onClick={() => removeFromCart(el)}> - </button>
