@@ -22,7 +22,7 @@ function App() {
   const [product, setProduct] = useState([]);
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
-  const [page, setPage] = useState(0);            // 0 : Browse, 1 : Cart, 2 : Confirmation, 3: itemView
+  const [page, setPage] = useState(0);            // 0 : Browse, 1 : Cart, 2 : Confirmation, 3: itemView , 5: credits
   const [oneProduct, setOneProduct] = useState([]);
 
   const [searchString, setSearchString] = useState("");
@@ -313,7 +313,12 @@ if (page == 0) {
     }
   return (
   <div>
-      Computer Store Inventory
+    <div className="mb-0 me-5 d-flex align-items-center">
+        <b>Computer Store Inventory</b>
+        <div className="mb-0 me-5 d-flex align-items-center">
+            <b onClick={() => setPage(5)}>About us!</b>
+        </div>
+    </div>
       <div className="card">
           <div className="row">
           {/* HERE, IT IS THE SHOPING CART */}
@@ -441,11 +446,69 @@ if (page == 0) {
       </div>
   </div>
   );
-} else{
+} else if(page == 3){
     return(
         <div className="d-flex h-200 text-center text-bg-dark">
             <div>{showOneItem}</div>
             <button type="button" variant="light" className="d-flex h-100 text-right" onClick={() => {setPage(0)}}>Keep Browsing</button>
+        </div>
+    )
+} 
+
+
+
+
+
+
+else{
+    return(
+        <div className="container text-center">
+            <div className="row">
+                <div className="col"></div>
+                <div className="col">
+                    <h2>SE/ComS319 Construction of User Interfaces, Spring 2023</h2>
+                </div>
+                <div className="col">
+                    <button type="button" variant="light" onClick={() => {setPage(0)}}>Back to Shopping!</button>
+                </div>
+            </div>
+            <div className="row">
+                <p>Date: 5/4/2023</p>
+            </div>
+            <hr></hr>
+            <div className="row"><h3>Authors:</h3></div>
+            <div className="row"> 
+                <div className="col">
+                    <h2><b>Benjamin Niklasen</b></h2>
+                </div>
+                <div className="col">
+                    <h2>bjn1@iastate.edu</h2>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col">
+                    <h2><b>Kyle Clements</b></h2>
+                </div>
+                <div className="col">
+                    <h2>kyle0324@iastate.edu</h2>
+                </div>
+            </div>
+            <div className="row"> <hr></hr></div>
+            <div className="row">
+                <h3>Proffessor: </h3>
+            </div>
+            <div className="row">
+                <div className="col">
+                    <h2>Dr. Abraham N. Aldaco Gastelum</h2>
+                </div>
+                <div className="col">
+                    <h2>aaldaco@iastate.edu</h2>
+                </div>
+            </div>
+            <hr></hr>
+            <div className="row">
+                <p>Thank you for viewing our product!</p>
+            </div>
         </div>
     )
 }
