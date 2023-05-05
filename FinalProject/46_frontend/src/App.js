@@ -269,7 +269,7 @@ const summaryList = document.querySelector('.card > ul');
 
 let validate = function(){
   let val = true;
-  let email = document.getElementById('inputEmail4')
+  let email = document.getElementById('inputEmail')
   let name = document.getElementById('inputName')
   let card = document.getElementById('inputCard')
   
@@ -293,7 +293,7 @@ let validate = function(){
   userInfo.card = card.value;
   }
   if (!email.value.includes("@")){
-    email.setAttribute("class", "form-control is invalid");
+    email.setAttribute("class", "form-control is-invalid");
     val = false;
   }
   else{
@@ -434,8 +434,8 @@ if (page == 0) {
               </div>
 
               <div className="col-md-6">
-                  <label htmlFor="inputEmail4" className="form-label">Email</label>
-                  <input type="email" className="form-control" id="inputEmail4"></input>
+                  <label htmlFor="inputEmail" className="form-label">Email*</label>
+                  <input type="email" className="form-control" id="inputEmail"></input>
                   <div className="valid-feedback">
                       Looks good!
                   </div>
