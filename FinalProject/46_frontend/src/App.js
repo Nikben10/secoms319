@@ -17,6 +17,8 @@ var userInfo = {
 
 let lowQuantity = 'red';
 let normQuantity = 'grey';
+let editedList = [];
+let numAvailable = 10;
 
 function App() {
   const [product, setProduct] = useState([]);
@@ -326,32 +328,156 @@ const alert = (message, type) => {
 
 function handleChange(evt) {
     const value = evt.target.value;
+    document.getElementById("correctIt").hidden = true;
+    document.getElementById("setIt").hidden = true;
     if (evt.target.name === "_id") {
         setAddNewProduct({ ...addNewProduct, _id: value});
+        if (!editedList.includes("_id")) {
+            editedList.push("_id");
+        }
+        if (value < 1) {
+            document.getElementById("_id").setAttribute("class", "form-control is-invalid");
+            return;
+        }
+        for (let prod of product) {
+            if (prod._id == value) {
+                document.getElementById("_id").setAttribute("class", "form-control is-invalid");
+                return;
+            }
+        }
+        document.getElementById("_id").setAttribute("class", "form-control is-valid");
+        return;
     } else if (evt.target.name === "name") {
         setAddNewProduct({ ...addNewProduct, name: value});
+        if (!editedList.includes("name")) {
+            editedList.push("name");
+        }
+        if (value.length < 1) {
+            document.getElementById("name").setAttribute("class", "form-control is-invalid");
+            return;
+        }
+        document.getElementById("name").setAttribute("class", "form-control is-valid");
+        return;
     } else if (evt.target.name === "price") {
         setAddNewProduct({ ...addNewProduct, price: value});
+        if (!editedList.includes("price")) {
+            editedList.push("price");
+        }
+        if (value < 0 || value.length == 0) {
+            document.getElementById("price").setAttribute("class", "form-control is-invalid");
+            return;
+        }
+        document.getElementById("price").setAttribute("class", "form-control is-valid");
+        return;
     } else if (evt.target.name === "category") {
         setAddNewProduct({ ...addNewProduct, category: value});
+        if (!editedList.includes("category")) {
+            editedList.push("category");
+        }
+        if (value.length < 1) {
+            document.getElementById("category").setAttribute("class", "form-control is-invalid");
+            return;
+        }
+        document.getElementById("category").setAttribute("class", "form-control is-valid");
+        return;
     } else if (evt.target.name === "shortDescription") {
         setAddNewProduct({ ...addNewProduct, shortdescription: value});
+        if (!editedList.includes("shortDesc")) {
+            editedList.push("shortDesc");
+        }
+        if (value.length < 1) {
+            document.getElementById("shortDescription").setAttribute("class", "form-control is-invalid");
+            return;
+        }
+        document.getElementById("shortDescription").setAttribute("class", "form-control is-valid");
+        return;
     } else if (evt.target.name === "imageName") {
         setAddNewProduct({ ...addNewProduct, imagename: value});
+        if (!editedList.includes("imageName")) {
+            editedList.push("imageName");
+        }
+        document.getElementById("imageName").setAttribute("class", "form-control is-valid");
+        return;
+            // let image = new Image();
+            // image.src = value;
+            // if (image.complete) {
+            //     document.getElementById("imageName").setAttribute("class", "form-control is-valid");
+            //     return;
+            // } else {
+            //     image.onload = () => {
+            //         document.getElementById("imageName").setAttribute("class", "form-control is-valid");
+            //         return;
+            //     }
+            //     document.getElementById("imageName").setAttribute("class", "form-control is-invalid");
+            //     return;
+            // }
     } else if (evt.target.name === "longDescription") {
         setAddNewProduct({ ...addNewProduct, longdescription: value});
+        if (!editedList.includes("longDesc")) {
+            editedList.push("longDesc");
+        }
+        if (value.length < 1) {
+            document.getElementById("longDescription").setAttribute("class", "form-control is-invalid");
+            return;
+        }
+        document.getElementById("longDescription").setAttribute("class", "form-control is-valid");
+        return;
     } else if (evt.target.name === "alt") {
         setAddNewProduct({ ...addNewProduct, alt: value});
+        if (!editedList.includes("alt")) {
+            editedList.push("alt");
+        }
+        if (value.length < 1) {
+            document.getElementById("alt").setAttribute("class", "form-control is-invalid");
+            return;
+        }
+        document.getElementById("alt").setAttribute("class", "form-control is-valid");
+        return;
     } else if (evt.target.name === "screenSize") {
         setAddNewProduct({ ...addNewProduct, screensize: value});
+        if (!editedList.includes("screenSize")) {
+            editedList.push("screenSize");
+        }
+        if (value < -1 || value.length == 0) {
+            document.getElementById("screenSize").setAttribute("class", "form-control is-invalid");
+            return;
+        }
+        document.getElementById("screenSize").setAttribute("class", "form-control is-valid");
+        return;
     } else if (evt.target.name === "quantity") {
         setAddNewProduct({ ...addNewProduct, quantity: value});
+        if (!editedList.includes("quantity")) {
+            editedList.push("quantity");
+        }
+        if (value < 1 || value.length == 0) {
+            document.getElementById("quantity").setAttribute("class", "form-control is-invalid");
+            return;
+        }
+        document.getElementById("quantity").setAttribute("class", "form-control is-valid");
+        return;
     }
 }
 
 function handleOnSubmit(e) {
     e.preventDefault();
     console.log(e.target.value);
+    if (editedList.length != numAvailable) {
+        console.log("Enter more");
+        document.getElementById("setIt").hidden = false;
+        return;
+    }
+    let list = ["_id", "name", "price", "category", "shortDescription", "longDescription", "imageName", "alt", "screenSize", "quantity"];
+    let correct = true;
+    list.forEach(id => {
+        let element = document.getElementById(id);
+        if (!element.classList.contains("is-valid")) {
+            console.log("correct more");
+            document.getElementById("correctIt").hidden = false;
+            correct = false;
+            return;
+        }
+    });
+    if (correct) {
     fetch("http://localhost:4000/insert", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -362,9 +488,25 @@ function handleOnSubmit(e) {
         console.log("Post a new product completed");
         console.log(data);
         if (data) {
+            getAllProducts();
+            editedList = [];
+            setAddNewProduct({
+                _id: 0,
+                name: "",
+                price: 0.0,
+                category: "",
+                shortdescription: "",
+                longdescription: "",
+                imagename: "http://127.0.0.1:4000/images/",
+                alt: "",
+                screensize: 0.0,
+                quantity: 0,
+              });
+            document.getElementById("createForm").reset();
             setPage(0);
         }
     });
+}
 }
 
 
@@ -505,7 +647,7 @@ if (page == 0) {
                   <p className ="mb-0 me-5 d-flex align-items-center">
                       <span className ="small text-muted me-2">Order total:</span>
                       <span className ="lead fw-normal">${cartTotal}</span> 
-                      <button type="button" variant="light" onClick={() => {setCart([]); setPage(0)}}> Keep Browsing </button>
+                      <button type="button" variant="light" onClick={() => {setCart([]); getAllProducts(); setPage(0)}}> Keep Browsing </button>
                   </p>
               </div>
           </div>
@@ -523,54 +665,80 @@ if (page == 0) {
     return (
         <div>
           <h3>Add a new product :</h3>
-          <form action="">
-            <div className='block'>
-                <label className='createLabel'>ID</label>
-                <input type="number" placeholder="id" name="_id" value={addNewProduct._id} onChange={handleChange} />
+          <form id="createForm">
+            <div className='form-group row'>
+                <label className='col-sm-2 col-form-label createLabel'>ID</label>
+                <div className='col-sm-2'>
+                    <input type="number" placeholder="id" className='form-control' id="_id" name="_id" value={addNewProduct._id} onChange={handleChange} />
+                </div>
             </div>
-            <div className='block'>
-                <label className='createLabel'>Name</label>
-              <input type="text" placeholder="name" name="name" value={addNewProduct.name} onChange={handleChange} />
+            <div className='form-group row'>
+                <label className='col-sm-2 col-form-label createLabel'>Name</label>
+                <div className='col-sm-2'>
+                    <input type="text" placeholder="name" className='form-control' id="name" name="name" value={addNewProduct.name} onChange={handleChange} />
+                </div>
             </div>
-            <div className='block'>
-                <label className='createLabel'>Price</label>
-              <input type="number" placeholder="price" name="price" value={addNewProduct.price} onChange={handleChange} />
+            <div className='form-group row'>
+                <label className='col-sm-2 col-form-label createLabel'>Price</label>
+                <div className='col-sm-2'>
+                    <input type="number" placeholder="price" className='form-control' id="price" name="price" value={addNewProduct.price} onChange={handleChange} />
+                </div>
             </div>
-            <div className='block'>
-                <label className='createLabel'>Category</label>
-              <input type="text" placeholder="category" name="category" value={addNewProduct.category} onChange={handleChange} />
+            <div className='form-group row'>
+                <label className='col-sm-2 col-form-label createLabel'>Category</label>
+                <div className='col-sm-2'>
+                    <input type="text" placeholder="category" className='form-control' id="category" name="category" value={addNewProduct.category} onChange={handleChange} />
+                </div>
             </div>
-            <div className='block'>
-                <label className='createLabel'>Short Description</label>
-              <input type="text" placeholder="Short Description" name="shortDescription" value={addNewProduct.shortdescription} onChange={handleChange} />
+            <div className='form-group row'>
+                <label className='col-sm-2 col-form-label createLabel'>Short Description</label>
+                <div className='col-sm-2'>
+                    <input type="text" placeholder="Short Description" className='form-control' id="shortDescription" name="shortDescription" value={addNewProduct.shortdescription} onChange={handleChange} />
+                </div>
             </div>
-            <div className='block'>
-                <label className='createLabel'>Long Description</label>
-              <input type="text" placeholder="Long description" name="longDescription" value={addNewProduct.longdescription} onChange={handleChange} />
+            <div className='form-group row'>
+                <label className='col-sm-2 col-form-label createLabel'>Long Description</label>
+                <div className='col-sm-2'>
+                    <input type="text" placeholder="Long description" className='form-control' id="longDescription" name="longDescription" value={addNewProduct.longdescription} onChange={handleChange} />
+                </div>
             </div>
-            <div className='block'>
-                <label className='createLabel'>Image Name (and path)</label>
-              <input type="text" placeholder="image name" name="imageName" value={addNewProduct.imagename} onChange={handleChange} />
+            <div className='form-group row'>
+                <label className='col-sm-2 col-form-label createLabel'>Image Name (and path)</label>
+                <div className='col-sm-2'>
+                    <input type="text" placeholder="image name" className='form-control' id="imageName" name="imageName" value={addNewProduct.imagename} onChange={handleChange} />
+                </div>
             </div>
-            <div className='block'>
-                <label className='createLabel'>Alt Text</label>
-              <input type="text" placeholder="alt text" name="alt" value={addNewProduct.alt} onChange={handleChange} />
+            <div className='form-group row'>
+                <label className='col-sm-2 col-form-label createLabel'>Alt Text</label>
+                <div className='col-sm-2'>
+                    <input type="text" placeholder="alt text" className='form-control' id="alt" name="alt" value={addNewProduct.alt} onChange={handleChange} />
+                </div>
             </div>
-            <div className='block'>
-                <label className='createLabel'>Screen Size (-1 for desktop)</label>
-              <input type="number" placeholder="screen size" name="screenSize" value={addNewProduct.screensize} onChange={handleChange} />
+            <div className='form-group row'>
+                <label className='col-sm-2 col-form-label createLabel'>Screen Size (-1 for desktop)</label>
+                <div className='col-sm-2'>
+                    <input type="number" placeholder="screen size" className='form-control' id="screenSize" name="screenSize" value={addNewProduct.screensize} onChange={handleChange} />
+                </div>
             </div>
-            <div className='block'>
-                <label className='createLabel'>quantity</label>
-              <input type="number" placeholder="quantity" name="quantity" value={addNewProduct.quantity} onChange={handleChange} />
+            <div className='form-group row'>
+                <label className='col-sm-2 col-form-label createLabel'>quantity</label>
+                <div className='col-sm-2'>
+                    <input type="number" placeholder="quantity" className='form-control' id="quantity" name="quantity" value={addNewProduct.quantity} onChange={handleChange} />
+                </div>
             </div>
             <div>
               <button type="submit" onClick={handleOnSubmit}>
                   Submit
               </button>
-              <button onClick={() => setPage(0)}>
+              <button onClick={() => {setPage(0); editedList = []}}>
                   Cancel
               </button>
+              <p id="correctIt" style={{color: 'red'}} hidden>
+                Please correct the required inputs.
+              </p>
+              <p id="setIt" style={{color: 'red'}} hidden>
+                Please set all the inputs.
+              </p>
             </div>
           </form>
         </div>

@@ -43,3 +43,11 @@
   text-align: right;
   padding: 10px;
 }
+
+.valid{
+  border: 1px solid lightgreen;
+}
+
+.invalid{
+  border:1px solid #ff0000
+}
