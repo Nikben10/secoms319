@@ -662,7 +662,7 @@ if (page == 0) {
                       {/* <div className="row"> */}
                           <div className="col">
                               Thank you {userInfo.fullName} for your order using the card ending in {userInfo.cardNumber.slice(-4)}!<br />
-                              We'll get that shipped to {userInfo.city} right away!
+                              We'll get that shipped to {userInfo.city != '' ? userInfo.city : "you"} right away!
                           </div>
                           <div className="col align-self-center text-right text-muted">
                               Products Ordered: {cart.length}
