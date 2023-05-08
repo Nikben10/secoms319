@@ -71,7 +71,7 @@ function App() {
                 <img className="img-fluid" src={el.imageName} alt={el.alt} onClick={() => {setPage(3); getOneProduct(el._id);}}/>
             </div>
             <div className="col">
-                <div className="row text-muted" onClick={() => {setPage(4); getOneProduct(el._id);}}>{el.name}</div>
+                <div className="row text-muted" onClick={() => {setPage(3); getOneProduct(el._id);}}>{el.name}</div>
                 <div className="row">{el.shortDescription}</div>
             </div>
             <div className="col">
@@ -89,11 +89,17 @@ function App() {
     ));
 
   function howManyofThis(el) {
-    if (cart.includes(el)) {
-        return el.cartQty;
-    } else {
-        return 0;
+    // if (cart.includes(el)) {
+    //     return el.cartQty;
+    // } else {
+    //     return 0;
+    // }
+    for (let arr of cart) {
+        if (arr._id == el._id) {
+            return arr.cartQty;
+        }
     }
+    return 0;
   }
 
   useEffect(() => {
@@ -110,27 +116,49 @@ function App() {
 
   const addToCart = (el) => {
     let hardCopy = [...cart];
-    if (!hardCopy.includes(el) || el.cartQty < el.quantity) {
-        if (hardCopy.includes(el)) {
-            el.cartQty += 1;
-        } else {
-            el["cartQty"] = 1;
-            hardCopy.push(el);
-        }
-        setCart(hardCopy);
-    } else {
+    // if (!hardCopy.includes(el) || el.cartQty < el.quantity) {
+    //     if (hardCopy.includes(el)) {
+    //         el.cartQty += 1;
+    //     } else {
+    //         el["cartQty"] = 1;
+    //         hardCopy.push(el);
+    //     }
+    //     setCart(hardCopy);
+    // } else {
         // let p = document.getElementById('quan' + el.quantity);
         // p
         // Was gonna make the quantity text flash ^
+    // }
+    for (let arr of hardCopy) {
+        if (arr._id == el._id) {
+            // Found a match in array
+            arr.cartQty++;
+            setCart(hardCopy);
+            return;
+        }
     }
+    // Else
+    // Did not find a match
+    el["cartQty"] = 1;
+    hardCopy.push(el);
+    setCart(hardCopy);
   };
 
   const removeFromCart = (el) => {
     let hardCopy = [...cart];
-    if (hardCopy.includes(el)) {
-        el.cartQty -= 1;
-        if (el.cartQty == 0) {
-            hardCopy.splice(hardCopy.indexOf(el), 1);
+    // if (hardCopy.includes(el)) {
+    //     el.cartQty -= 1;
+    //     if (el.cartQty == 0) {
+    //         hardCopy.splice(hardCopy.indexOf(el), 1);
+    //     }
+    // }
+    for (let arr of hardCopy) {
+        if (arr._id == el._id) {
+            arr.cartQty--;
+            if (arr.cartQty == 0) {
+                hardCopy.splice(hardCopy.indexOf(arr), 1);
+                break;
+            }
         }
     }
     setCart(hardCopy);
