@@ -45,8 +45,8 @@ function App() {
     fetch("http://localhost:4000/")
     .then((response) => response.json())
     .then((data) => {
-        console.log("Show Catalog of Products :");
-        console.log(data);
+       // console.log("Show Catalog of Products :");
+       // console.log(data);
         if (product != data) {
 
             setProduct(data);
@@ -132,8 +132,10 @@ function App() {
     for (let arr of hardCopy) {
         if (arr._id == el._id) {
             // Found a match in array
-            arr.cartQty++;
-            setCart(hardCopy);
+            if (arr.cartQty < arr.quantity) {
+                arr.cartQty++;
+                setCart(hardCopy);
+            }
             return;
         }
     }
@@ -173,7 +175,7 @@ function App() {
   }
 
   const showOneItem = oneProduct.map((el) => (
-    <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" key={el._id}>
         <header className="mb-auto">
             <img className="img-fluid" src={el.imageName}></img>
         </header>
@@ -184,7 +186,7 @@ function App() {
         </main>
 
         <footer>
-            <div><p>How many should we add to cart?</p></div>
+            <div><p>How many would you like in your cart?</p></div>
             <div className="row g-0 text-center">
                 <div className="col-sm-4 col-md-4">
                     <button type="button" variant="light" onClick={() => removeFromCart(el)}> - </button>
@@ -201,20 +203,20 @@ function App() {
   ));
 
   function getOneProduct(id) {
-    console.log(id);
+   // console.log(id);
     if (id >= 1 && id <= 20) {
       fetch("http://localhost:4000/" + id)
       .then((response) => response.json())
       .then((data) => {
-        console.log("Show one product :", id);
-        console.log(data);
+       // console.log("Show one product :", id);
+       // console.log(data);
         const dataArr = [];
         dataArr.push(data);
         setOneProduct(dataArr);
       });
     } else {
-      console.log("Wrong number of Product id.");
-      console.log('We sent %d', id);
+     // console.log("Wrong number of Product id.");
+     // console.log('We sent %d', id);
       setOneProduct([]);
     }
   }
@@ -259,14 +261,14 @@ function buyItems(cart) {
         let newQuantity = el.quantity - el.cartQty;
         if (newQuantity > 0) {
             // Update the quantity of the product
-            console.log("Updating id : " + el._id + " to have quantity : " + newQuantity);
+           // console.log("Updating id : " + el._id + " to have quantity : " + newQuantity);
             fetch("http://localhost:4000/" + el._id + "/" + newQuantity, {
                 method: "PUT"
             })
             .then((response) => response.json())
             .then((data) => {
-                console.log("Updated quantity :");
-                console.log(data);
+               // console.log("Updated quantity :");
+               // console.log(data);
                 // if (product != data) {
                     // setProduct(data);
                 // }
@@ -281,8 +283,8 @@ function buyItems(cart) {
             // fetch("http://localhost:4000/" + el._id + "/" + newQuantity)
             .then((response) => response.json())
             .then((data) => {
-                console.log("Deleted prooduct : " + el._id);
-                console.log(data);
+               // console.log("Deleted prooduct : " + el._id);
+               // console.log(data);
                 // if (product != data) {
                     // setProduct(data);
                 // }
@@ -488,9 +490,9 @@ function handleChange(evt) {
 
 function handleOnSubmit(e) {
     e.preventDefault();
-    console.log(e.target.value);
+   // console.log(e.target.value);
     if (editedList.length != numAvailable) {
-        console.log("Enter more");
+       // console.log("Enter more");
         document.getElementById("setIt").hidden = false;
         return;
     }
@@ -499,7 +501,7 @@ function handleOnSubmit(e) {
     list.forEach(id => {
         let element = document.getElementById(id);
         if (!element.classList.contains("is-valid")) {
-            console.log("correct more");
+           // console.log("correct more");
             document.getElementById("correctIt").hidden = false;
             correct = false;
             return;
@@ -513,8 +515,8 @@ function handleOnSubmit(e) {
     })
     .then((response) => response.json())
     .then((data) => {
-        console.log("Post a new product completed");
-        console.log(data);
+       // console.log("Post a new product completed");
+       // console.log(data);
         if (data) {
             getAllProducts();
             editedList = [];
@@ -806,7 +808,7 @@ if (page == 0) {
             </div>
             <div className="row"> <hr></hr></div>
             <div className="row">
-                <h3>Proffessor: </h3>
+                <h3>Professor: </h3>
             </div>
             <div className="row">
                 <div className="col">

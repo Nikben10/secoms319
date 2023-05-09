@@ -8,16 +8,5 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
-/* .blink_me {
-  animation: blinker 1s step-start infinite;
-}
-
-@keyframes blinker {
-  50% {
-    opacity: 0;
-  }
-} */​
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}​
