@@ -45,8 +45,8 @@ function App() {
     fetch("http://localhost:4000/")
     .then((response) => response.json())
     .then((data) => {
-       // console.log("Show Catalog of Products :");
-       // console.log(data);
+        console.log("Show Catalog of Products :");
+        console.log(data);
         if (product != data) {
 
             setProduct(data);
@@ -89,11 +89,6 @@ function App() {
     ));
 
   function howManyofThis(el) {
-    // if (cart.includes(el)) {
-    //     return el.cartQty;
-    // } else {
-    //     return 0;
-    // }
     for (let arr of cart) {
         if (arr._id == el._id) {
             return arr.cartQty;
@@ -116,31 +111,14 @@ function App() {
 
   const addToCart = (el) => {
     let hardCopy = [...cart];
-    // if (!hardCopy.includes(el) || el.cartQty < el.quantity) {
-    //     if (hardCopy.includes(el)) {
-    //         el.cartQty += 1;
-    //     } else {
-    //         el["cartQty"] = 1;
-    //         hardCopy.push(el);
-    //     }
-    //     setCart(hardCopy);
-    // } else {
-        // let p = document.getElementById('quan' + el.quantity);
-        // p
-        // Was gonna make the quantity text flash ^
-    // }
     for (let arr of hardCopy) {
         if (arr._id == el._id) {
             // Found a match in array
-            if (arr.cartQty < arr.quantity) {
-                arr.cartQty++;
-                setCart(hardCopy);
-            }
+            arr.cartQty++;
+            setCart(hardCopy);
             return;
         }
     }
-    // Else
-    // Did not find a match
     el["cartQty"] = 1;
     hardCopy.push(el);
     setCart(hardCopy);
@@ -148,12 +126,6 @@ function App() {
 
   const removeFromCart = (el) => {
     let hardCopy = [...cart];
-    // if (hardCopy.includes(el)) {
-    //     el.cartQty -= 1;
-    //     if (el.cartQty == 0) {
-    //         hardCopy.splice(hardCopy.indexOf(el), 1);
-    //     }
-    // }
     for (let arr of hardCopy) {
         if (arr._id == el._id) {
             arr.cartQty--;
@@ -175,7 +147,7 @@ function App() {
   }
 
   const showOneItem = oneProduct.map((el) => (
-    <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" key={el._id}>
+    <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header className="mb-auto">
             <img className="img-fluid" src={el.imageName}></img>
         </header>
@@ -186,7 +158,7 @@ function App() {
         </main>
 
         <footer>
-            <div><p>How many would you like in your cart?</p></div>
+            <div><p>How many should we add to cart?</p></div>
             <div className="row g-0 text-center">
                 <div className="col-sm-4 col-md-4">
                     <button type="button" variant="light" onClick={() => removeFromCart(el)}> - </button>
@@ -203,20 +175,20 @@ function App() {
   ));
 
   function getOneProduct(id) {
-   // console.log(id);
+    console.log(id);
     if (id >= 1 && id <= 20) {
       fetch("http://localhost:4000/" + id)
       .then((response) => response.json())
       .then((data) => {
-       // console.log("Show one product :", id);
-       // console.log(data);
+        console.log("Show one product :", id);
+        console.log(data);
         const dataArr = [];
         dataArr.push(data);
         setOneProduct(dataArr);
       });
     } else {
-     // console.log("Wrong number of Product id.");
-     // console.log('We sent %d', id);
+      console.log("Wrong number of Product id.");
+      console.log('We sent %d', id);
       setOneProduct([]);
     }
   }
@@ -260,18 +232,14 @@ function buyItems(cart) {
     cart.forEach(el => {
         let newQuantity = el.quantity - el.cartQty;
         if (newQuantity > 0) {
-            // Update the quantity of the product
-           // console.log("Updating id : " + el._id + " to have quantity : " + newQuantity);
+            console.log("Updating id : " + el._id + " to have quantity : " + newQuantity);
             fetch("http://localhost:4000/" + el._id + "/" + newQuantity, {
                 method: "PUT"
             })
             .then((response) => response.json())
             .then((data) => {
-               // console.log("Updated quantity :");
-               // console.log(data);
-                // if (product != data) {
-                    // setProduct(data);
-                // }
+                console.log("Updated quantity :");
+                console.log(data);
             });
         } else {
             // Delete the product
@@ -280,14 +248,10 @@ function buyItems(cart) {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ _id: el._id }),
             })
-            // fetch("http://localhost:4000/" + el._id + "/" + newQuantity)
             .then((response) => response.json())
             .then((data) => {
-               // console.log("Deleted prooduct : " + el._id);
-               // console.log(data);
-                // if (product != data) {
-                    // setProduct(data);
-                // }
+                console.log("Deleted prooduct : " + el._id);
+                console.log(data);
             });
         }
     });
@@ -428,19 +392,6 @@ function handleChange(evt) {
         }
         document.getElementById("imageName").setAttribute("class", "form-control is-valid");
         return;
-            // let image = new Image();
-            // image.src = value;
-            // if (image.complete) {
-            //     document.getElementById("imageName").setAttribute("class", "form-control is-valid");
-            //     return;
-            // } else {
-            //     image.onload = () => {
-            //         document.getElementById("imageName").setAttribute("class", "form-control is-valid");
-            //         return;
-            //     }
-            //     document.getElementById("imageName").setAttribute("class", "form-control is-invalid");
-            //     return;
-            // }
     } else if (evt.target.name === "longDescription") {
         setAddNewProduct({ ...addNewProduct, longdescription: value});
         if (!editedList.includes("longDesc")) {
@@ -490,9 +441,9 @@ function handleChange(evt) {
 
 function handleOnSubmit(e) {
     e.preventDefault();
-   // console.log(e.target.value);
+    console.log(e.target.value);
     if (editedList.length != numAvailable) {
-       // console.log("Enter more");
+        console.log("Enter more");
         document.getElementById("setIt").hidden = false;
         return;
     }
@@ -501,7 +452,7 @@ function handleOnSubmit(e) {
     list.forEach(id => {
         let element = document.getElementById(id);
         if (!element.classList.contains("is-valid")) {
-           // console.log("correct more");
+            console.log("correct more");
             document.getElementById("correctIt").hidden = false;
             correct = false;
             return;
@@ -515,8 +466,8 @@ function handleOnSubmit(e) {
     })
     .then((response) => response.json())
     .then((data) => {
-       // console.log("Post a new product completed");
-       // console.log(data);
+        console.log("Post a new product completed");
+        console.log(data);
         if (data) {
             getAllProducts();
             editedList = [];
@@ -808,7 +759,7 @@ if (page == 0) {
             </div>
             <div className="row"> <hr></hr></div>
             <div className="row">
-                <h3>Professor: </h3>
+                <h3>Proffessor: </h3>
             </div>
             <div className="row">
                 <div className="col">
